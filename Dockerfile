@@ -13,4 +13,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "nodemon", "app.js" ]
+CMD [ "./node_modules/.bin/nodemon", "app.js" ]
