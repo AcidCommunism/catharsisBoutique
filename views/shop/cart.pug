@@ -1,0 +1,33 @@
+extends ../includes/head.pug
+
+block title 
+    title #{pageTitle}
+
+block styles 
+    link(rel="stylesheet" href="/css/main.css")
+    link(rel="stylesheet" href="/css/cart.css")
+
+block content
+    main 
+        if products.length > 0
+            ul.cart__item-list
+                each item in products
+                    li.cart__item
+                        h1 #{item.title}
+                        h2 Quantity: #{item.quantity}
+                        form(action="/cart-delete-item" method="POST")
+                            input(
+                                type="hidden"
+                                value=item._id
+                                name="productId"
+                                )
+                            button(class="btn danger" type="submit") Delete
+            hr
+            .centered 
+                form(action="/create-order" method="POST")
+                    button.btn(type="submit") Checkout 
+        else 
+            h1 No products in Cart!
+block scripts 
+    script(src="/js/main.js")
+    script(src="bootstrap/dist/js/bootstrap.bundle.js") 
