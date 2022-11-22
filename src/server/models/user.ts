@@ -1,4 +1,4 @@
-import mongodb from 'mongodb';
+import { ObjectId } from 'mongodb';
 import { DataBase } from '../util/database';
 import { Cart } from '../../types/Icart';
 import { logger } from '../../logger';
@@ -67,7 +67,7 @@ export class User {
             });
     }
 
-    deleteItemFromCart(productId: number | mongodb.ObjectId) {
+    deleteItemFromCart(productId: number | ObjectId) {
         const updatedCartItems = this.cart.items.filter(item => {
             return item.productId!.toString() !== productId.toString();
         });
@@ -79,7 +79,7 @@ export class User {
         return db
             .collection('users')
             .updateOne(
-                { _id: new mongodb.ObjectId(this._id) },
+                { _id: new ObjectId(this._id) },
                 { $set: { cart: updatedCart } }
             );
     }
@@ -89,7 +89,7 @@ export class User {
         return db
             .collection('users')
             .updateOne(
-                { _id: new mongodb.ObjectId(this._id) },
+                { _id: new ObjectId(this._id) },
                 { $set: { cart: this.cart } }
             );
     }
@@ -98,21 +98,15 @@ export class User {
         const cartProductIndex = this.cart.items.findIndex(cp => {
             return cp.productId!.toString() === product._id.toString();
         });
-        let newQuantity = 1;
-        const updatedCartItems = [...this.cart.items];
 
         if (cartProductIndex >= 0) {
-            newQuantity = this.cart.items[cartProductIndex].quantity + 1;
-            updatedCartItems[cartProductIndex].quantity = newQuantity;
+            this.cart.items[cartProductIndex].quantity += 1;
         } else {
-            updatedCartItems.push({
-                productId: new mongodb.ObjectId(product._id),
-                quantity: newQuantity,
+            this.cart.items.push({
+                productId: new ObjectId(product._id),
+                quantity: 1,
             });
         }
-        this.cart = {
-            items: updatedCartItems,
-        };
         return this._updateCart();
     }
 
@@ -126,7 +120,7 @@ export class User {
                 const order = {
                     items: products,
                     user: {
-                        _id: new mongodb.ObjectId(this._id),
+                        _id: new ObjectId(this._id),
                         name: this.name,
                         email: this.email,
                     },
@@ -143,7 +137,7 @@ export class User {
         const db = DataBase.getDbConnection();
         return db
             .collection('orders')
-            .find({ 'user._id': new mongodb.ObjectId(this._id) })
+            .find({ 'user._id': new ObjectId(this._id) })
             .toArray();
     }
 
@@ -151,7 +145,7 @@ export class User {
         const db = DataBase.getDbConnection();
         return db
             .collection('users')
-            .findOne({ _id: new mongodb.ObjectId(userId) })
+            .findOne({ _id: new ObjectId(userId) })
             .catch(err => logger.error(err));
     }
 }

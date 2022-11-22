@@ -1,12 +1,10 @@
-import { Product } from './Iproduct';
-import mongodb from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 export interface Cart {
     items: CartItem[];
 }
 
 export interface CartItem {
-    _id?: mongodb.ObjectId;
-    productId?: number | mongodb.ObjectId;
+    productId?: ObjectId;
     quantity: number;
 }

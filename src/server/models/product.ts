@@ -8,7 +8,7 @@ export class Product {
     private description: string;
     private imageUrl: string;
     private _id: ObjectId | null;
-    private userId: string;
+    private userId: ObjectId | null;
 
     constructor(
         title: string,
@@ -23,7 +23,7 @@ export class Product {
         this.description = description;
         this.imageUrl = imageUrl;
         this._id = _id ? new ObjectId(_id) : null;
-        this.userId = userId;
+        this.userId = userId ? new ObjectId(userId) : null;
     }
 
     save() {

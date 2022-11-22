@@ -4,28 +4,28 @@ block title
     title #{pageTitle}
 
 block styles 
-    link(rel="stylesheet" href="/css/main.css")
-    link(rel="stylesheet" href="/css/cart.css")
+    link(rel="stylesheet" href="/scss/main.css")
+    link(rel="stylesheet" href="/scss/cart.css")
 
 block content
     main 
         if products.length > 0
-            ul.cart__item-list
+            div(class="d-flex flex-column align-items-center")
                 each item in products
-                    li.cart__item
-                        h1 #{item.title}
-                        h2 Quantity: #{item.quantity}
+                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light")
+                        h1.card-title #{item.title}
+                        p.card-text Quantity: #{item.quantity}
                         form(action="/cart-delete-item" method="POST")
                             input(
                                 type="hidden"
                                 value=item._id
                                 name="productId"
                                 )
-                            button(class="btn danger" type="submit") Delete
+                            button(class="btn danger bg-dark" type="submit") Delete
             hr
             .centered 
                 form(action="/create-order" method="POST")
-                    button.btn(type="submit") Checkout 
+                button(type="submit" class="btn bg-dark") Checkout 
         else 
             h1 No products in Cart!
 block scripts 

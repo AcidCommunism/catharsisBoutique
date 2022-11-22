@@ -130,18 +130,21 @@ class App {
         response: express.Response,
         next: express.NextFunction
     ) {
-        // User.findById('62cbecda99f109ea5fa34237')
-        //     .then(user => {
-        //         request.user = new User(
-        //             user!.name,
-        //             user!.email,
-        //             user!.cart,
-        //             user!._id.toString()
-        //         );
-        //         next();
-        //     })
-        //     .catch(err => console.log(err));
-        next();
+        User.findById('637c79ad6a70b0999b14ba09')
+            .then(user => {
+                request.user = new User(
+                    //@ts-ignore
+                    user!.name,
+                    //@ts-ignore
+                    user!.email,
+                    //@ts-ignore
+                    user!.cart,
+                    //@ts-ignore
+                    user!._id.toString()
+                );
+                next();
+            })
+            .catch(err => console.log(err));
     }
 
     public listen() {

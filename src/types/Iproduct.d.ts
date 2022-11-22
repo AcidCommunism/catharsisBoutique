@@ -1,6 +1,10 @@
-import mongodb from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 export interface Product {
-    productId: mongodb.ObjectId;
-    _id: mongodb.ObjectId;
+    productId: ObjectId;
+    _id: ObjectId;
+    title: string;
+    price: number;
+    description: string;
+    imageUrl: string;
 }
