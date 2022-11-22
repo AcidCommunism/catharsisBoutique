@@ -7,7 +7,7 @@ block title
         title Add product
 
 block styles
-    link(rel="stylesheet" href="/css/main.css")
+    link(rel="stylesheet" href="/scss/main.css")
 
 block content 
     main 
@@ -15,34 +15,38 @@ block content
             form.product-form(
                 action="/admin/edit-product" 
                 method="POST")
-                .form-control 
+                .mb-3 
                     label(for="title") Title 
                     input(
                         type="text"
                         name="title"
                         id="title"
-                        value=product.title)
-                .form-control 
+                        value=product.title
+                        class="form-control")
+                .mb-3 
                     label(for="imageUrl") Image URL 
                     input(
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
-                        value=product.imageUrl)
-                .form-control 
+                        value=product.imageUrl
+                        class="form-control")
+                .mb-3 
                     label(for="price") Price 
                     input(
                         type="number"
                         name="price"
                         id="price"
                         step="0.01"
-                        value=product.price) 
-                .form-control 
+                        value=product.price
+                        class="form-control") 
+                .mb-3 
                     label(for="desctiption") Description 
                     textarea(
                         name="description"
                         id="description"
-                        rows="5") #{product.description}
+                        rows="5"
+                        class="form-control") #{product.description}
                 input(
                     type="hidden"
                     value=product._id
@@ -52,33 +56,37 @@ block content
             form.product-form(
                 action="/admin/add-product" 
                 method="POST")
-                .form-control 
+                .mb-3 
                     label(for="title") Title 
                     input(
                         type="text"
                         name="title"
-                        id="title")
-                .form-control 
+                        id="title"
+                        class="form-control")
+                .mb-3 
                     label(for="imageUrl") Image URL 
                     input(
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
-                        value="")
-                .form-control 
+                        value=""
+                        class="form-control")
+                .mb-3
                     label(for="price") Price 
                     input(
                         type="number"
                         name="price"
                         id="price"
                         step="0.01"
-                        value="") 
-                .form-control 
+                        value=""
+                        class="form-control") 
+                .mb-3
                     label(for="desctiption") Description 
                     textarea(
                         name="description"
                         id="description"
-                        rows="5")
+                        rows="5"
+                        class="form-control")
                 button.btn(type="submit") Add product
 block scripts 
     script(src="/js/main.js")

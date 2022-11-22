@@ -4,35 +4,37 @@ block title
     title Admin Products 
 
 block styles
-    link(rel="stylesheet" href="/css/main.css")
+    link(rel="stylesheet" href="/scss/main.css")
+    link(rel="stylesheet" href="/scss/product.css")
 
 block content 
     main 
         if prods.length > 0
-            .grid 
+            div(class="d-flex flex-column flex-sm-row justify-content-evenly") 
                 each product in prods 
-                    article(class="card product-item")
-                        header.card__header 
-                            h1.product__title #{product.title}
-                        .card__image 
-                            img(
-                                src=product.imageUrl,
-                                alt=product.title)
-                        .card__content
-                            h2.product__price #{product.price}$
-                        p.product__description #{product.description}
-                        .card__actions 
-                            a(
-                                href="/admin/edit-product/" + product._id + "?edit=true"
-                                class="btn") Edit 
-                            form(
-                                action="/admin/delete-product"
-                                method="POST")
-                                input(
-                                    type="hidden"
-                                    name="productId"
-                                    value=product._id)
-                                button.btn(type="submit") Delete
+                    div(class="card col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 border-light")
+                        div(class="card-header text-center") #{product.title}
+                        img(
+                            src=product.imageUrl,
+                            alt=product.title
+                            )
+                        .card-body 
+                            h5(class="card-title text-center") #{product.price}$
+                            p(class="card-text text-center") #{product.description}
+                        div(class="container d-flex flex-column my-2")
+                            div(class="container text-center my-2")
+                                a(
+                                    href="/admin/edit-product/" + product._id + "?edit=true"
+                                    class="btn") Edit 
+                            div(class="container text-center")
+                                form(
+                                    action="/admin/delete-product"
+                                    method="POST")
+                                    input(
+                                        type="hidden"
+                                        name="productId"
+                                        value=product._id)
+                                    button.btn(type="submit") Delete
         else 
             h1 No products found!
 
