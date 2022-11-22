@@ -1,0 +1,85 @@
+extends ../includes/head.pug
+
+block title 
+    if editing
+        title #{product.title}
+    else 
+        title Add product
+
+block styles
+    link(rel="stylesheet" href="/css/main.css")
+
+block content 
+    main 
+        if editing 
+            form.product-form(
+                action="/admin/edit-product" 
+                method="POST")
+                .form-control 
+                    label(for="title") Title 
+                    input(
+                        type="text"
+                        name="title"
+                        id="title"
+                        value=product.title)
+                .form-control 
+                    label(for="imageUrl") Image URL 
+                    input(
+                        type="text"
+                        name="imageUrl"
+                        id="imageUrl"
+                        value=product.imageUrl)
+                .form-control 
+                    label(for="price") Price 
+                    input(
+                        type="number"
+                        name="price"
+                        id="price"
+                        step="0.01"
+                        value=product.price) 
+                .form-control 
+                    label(for="desctiption") Description 
+                    textarea(
+                        name="description"
+                        id="description"
+                        rows="5") #{product.description}
+                input(
+                    type="hidden"
+                    value=product._id
+                    name="productId")
+                button.btn(type="submit") Update product
+        else 
+            form.product-form(
+                action="/admin/add-product" 
+                method="POST")
+                .form-control 
+                    label(for="title") Title 
+                    input(
+                        type="text"
+                        name="title"
+                        id="title")
+                .form-control 
+                    label(for="imageUrl") Image URL 
+                    input(
+                        type="text"
+                        name="imageUrl"
+                        id="imageUrl"
+                        value="")
+                .form-control 
+                    label(for="price") Price 
+                    input(
+                        type="number"
+                        name="price"
+                        id="price"
+                        step="0.01"
+                        value="") 
+                .form-control 
+                    label(for="desctiption") Description 
+                    textarea(
+                        name="description"
+                        id="description"
+                        rows="5")
+                button.btn(type="submit") Add product
+block scripts 
+    script(src="/js/main.js")
+    script(src="bootstrap/dist/js/bootstrap.bundle.js")

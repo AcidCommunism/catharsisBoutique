@@ -1,0 +1,42 @@
+extends ../includes/head.pug
+
+block title 
+    title Admin Products 
+
+block styles
+    link(rel="stylesheet" href="/css/main.css")
+
+block content 
+    main 
+        if prods.length > 0
+            .grid 
+                each product in prods 
+                    article(class="card product-item")
+                        header.card__header 
+                            h1.product__title #{product.title}
+                        .card__image 
+                            img(
+                                src=product.imageUrl,
+                                alt=product.title)
+                        .card__content
+                            h2.product__price #{product.price}$
+                        p.product__description #{product.description}
+                        .card__actions 
+                            a(
+                                href="/admin/edit-product/" + product._id + "?edit=true"
+                                class="btn") Edit 
+                            form(
+                                action="/admin/delete-product"
+                                method="POST")
+                                input(
+                                    type="hidden"
+                                    name="productId"
+                                    value=product._id)
+                                button.btn(type="submit") Delete
+        else 
+            h1 No products found!
+
+
+block scripts 
+    script(src="/js/main.js")
+    script(src="bootstrap/dist/js/bootstrap.bundle.js")

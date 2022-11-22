@@ -14,4 +14,5 @@ RUN npm install -g nodemon
 COPY . .
 
 EXPOSE 3000
-CMD [ "./node_modules/.bin/nodemon", "app.js" ]
+ENTRYPOINT [ "./node_modules/.bin/nodemon" ]
+CMD [ "app.js" ]
