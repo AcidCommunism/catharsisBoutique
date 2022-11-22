@@ -22,7 +22,7 @@ block content
                         name="title"
                         id="title"
                         value=product.title
-                        class="form-control bg-dark text-light")
+                        class="form-control bg-dark text-light border-dark")
                 .mb-3 
                     label(for="imageUrl" class="text-light") Image URL 
                     input(
@@ -30,7 +30,7 @@ block content
                         name="imageUrl"
                         id="imageUrl"
                         value=product.imageUrl
-                        class="form-control bg-dark text-light")
+                        class="form-control bg-dark text-light border-dark")
                 .mb-3 
                     label(for="price" class="text-light") Price 
                     input(
@@ -39,30 +39,30 @@ block content
                         id="price"
                         step="0.01"
                         value=product.price
-                        class="form-control bg-dark text-light") 
+                        class="form-control bg-dark text-light border-dark") 
                 .mb-3 
                     label(for="desctiption" class="text-light") Description 
                     textarea(
                         name="description"
                         id="description"
                         rows="5"
-                        class="form-control bg-dark text-light") #{product.description}
+                        class="form-control bg-dark text-light border-dark") #{product.description}
                 input(
                     type="hidden"
                     value=product._id
                     name="productId")
-                button(type="submit" class="btn bg-dark") Update product
+                button(type="submit" class="btn bg-dark border-dark") Update product
         else 
             form.product-form(
                 action="/admin/add-product" 
                 method="POST")
                 .mb-3 
-                    label(for="title" class="text-light") Title 
+                    label(for="title" class="text-light border-dark") Title 
                     input(
                         type="text"
                         name="title"
                         id="title"
-                        class="form-control bg-dark text-light")
+                        class="form-control bg-dark text-light border-dark")
                 .mb-3 
                     label(for="imageUrl" class="text-light") Image URL 
                     input(
@@ -70,7 +70,7 @@ block content
                         name="imageUrl"
                         id="imageUrl"
                         value=""
-                        class="form-control bg-dark text-light")
+                        class="form-control bg-dark text-light border-dark")
                 .mb-3
                     label(for="price" class="text-light") Price 
                     input(
@@ -79,14 +79,14 @@ block content
                         id="price"
                         step="0.01"
                         value=""
-                        class="form-control bg-dark text-light") 
+                        class="form-control bg-dark text-light border-dark") 
                 .mb-3
                     label(for="desctiption" class="text-light") Description 
                     textarea(
                         name="description"
                         id="description"
                         rows="5"
-                        class="form-control bg-dark text-light")
+                        class="form-control bg-dark text-light border-dark")
                 button(type="submit" class="btn bg-dark") Add product
 block scripts 
     script(src="/js/main.js")
