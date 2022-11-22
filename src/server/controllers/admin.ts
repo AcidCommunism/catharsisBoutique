@@ -61,7 +61,7 @@ export class AdminController {
                     product: product,
                 });
             })
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     };
 
     public postEditProduct = (
@@ -82,7 +82,7 @@ export class AdminController {
         return product
             .save()
             .then(() => res.redirect('/admin/products'))
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     };
 
     public getProducts = (
@@ -98,7 +98,7 @@ export class AdminController {
                     path: '/admin/products',
                 });
             })
-            .catch(err => console.error(err));
+            .catch(err => logger.error(err));
     };
 
     public postDeleteProduct = (
@@ -108,11 +108,12 @@ export class AdminController {
     ) => {
         const prodId = req.body.productId;
         Product.findById(prodId)
+            //@ts-ignore
             .then(product => Product.deleteById(product!._id))
             .then(result => {
-                console.log(`Deleted product with id: ${prodId}`);
+                logger.info(`Deleted product with id: ${prodId}`);
                 res.redirect('/admin/products');
             })
-            .catch(err => console.error(err));
+            .catch(err => logger.error(err));
     };
 }

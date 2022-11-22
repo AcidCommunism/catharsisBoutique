@@ -26,6 +26,7 @@ class App {
         this.app = express();
         this.port = port;
         this._setViewsEngine();
+        this._setStylesPaths();
         this._initMiddlewares();
         this._initRouters(routers);
         this._initDefaultControllers();
@@ -54,11 +55,34 @@ class App {
     private _setViewsEngine() {
         logger.info('Setting view engine...');
 
-        this.app.use(express.static(path.join(__dirname, '../../public')));
         this.app.set('view engine', 'pug');
         this.app.set('views', 'views');
 
         logger.info('View engine is set!');
+    }
+
+    private _setStylesPaths() {
+        logger.info('Setting styles paths...');
+
+        this.app.use(express.static(path.join(__dirname, '../../public')));
+        this.app.use(
+            '/bootstrap',
+            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+        );
+        this.app.use(
+            '/admin/bootstrap',
+            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+        );
+        this.app.use(
+            '/admin/edit-product/bootstrap',
+            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+        );
+        this.app.use(
+            '/products/bootstrap',
+            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+        );
+
+        logger.info('Styles paths are set!');
     }
 
     private _initRouters(
@@ -80,22 +104,6 @@ class App {
     private _initDefaultControllers() {
         logger.info('Initializing default controllers...');
 
-        this.app.use(
-            '/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
-        );
-        this.app.use(
-            '/admin/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
-        );
-        this.app.use(
-            '/admin/edit-product/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
-        );
-        this.app.use(
-            '/products/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
-        );
         this.app.use(new ErrorController().get404);
 
         logger.info('Default controllers initialized!');

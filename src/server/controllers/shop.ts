@@ -29,6 +29,7 @@ export class ShopController {
             .then(product => {
                 res.render('shop/product-detail', {
                     product: product,
+                    //@ts-ignore
                     pageTitle: product!.title,
                     path: '/products',
                 });
@@ -60,7 +61,7 @@ export class ShopController {
         req?.user
             ?.getCart()
             .then(products => {
-                console.log('Products:', products);
+                logger.info('Products:', products);
                 return res.render('shop/cart', {
                     path: '/cart',
                     pageTitle: 'Your cart',

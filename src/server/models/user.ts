@@ -152,6 +152,6 @@ export class User {
         return db
             .collection('users')
             .findOne({ _id: new mongodb.ObjectId(userId) })
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     }
 }

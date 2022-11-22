@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { DataBase } from '../util/database';
+import { logger } from '../../logger';
 
 export class Product {
     private title: string;
@@ -36,14 +37,14 @@ export class Product {
                         $set: this,
                     }
                 )
-                .catch(err => console.log(err));
+                .catch(err => logger.error(err));
         }
         return (
             db
                 .collection('products')
                 //@ts-ignore
                 .insertOne(this)
-                .catch(err => console.log(err))
+                .catch(err => logger.error(err))
         );
     }
 
@@ -52,8 +53,8 @@ export class Product {
         return db
             .collection('products')
             .deleteOne({ _id: new ObjectId(prodId) })
-            .then(result => console.log(`Deleted product with id: ${prodId}`))
-            .catch(err => console.log(err));
+            .then(result => logger.info(`Deleted product with id: ${prodId}`))
+            .catch(err => logger.error(err));
     }
 
     static fetchAll() {
@@ -65,7 +66,7 @@ export class Product {
             .then(products => {
                 return products;
             })
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     }
 
     static findById(prodId: string) {
@@ -77,6 +78,6 @@ export class Product {
             .then(product => {
                 return product;
             })
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     }
 }
