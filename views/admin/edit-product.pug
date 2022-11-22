@@ -16,78 +16,78 @@ block content
                 action="/admin/edit-product" 
                 method="POST")
                 .mb-3 
-                    label(for="title") Title 
+                    label(for="title" class="text-light") Title 
                     input(
                         type="text"
                         name="title"
                         id="title"
                         value=product.title
-                        class="form-control")
+                        class="form-control bg-dark text-light")
                 .mb-3 
-                    label(for="imageUrl") Image URL 
+                    label(for="imageUrl" class="text-light") Image URL 
                     input(
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
                         value=product.imageUrl
-                        class="form-control")
+                        class="form-control bg-dark text-light")
                 .mb-3 
-                    label(for="price") Price 
+                    label(for="price" class="text-light") Price 
                     input(
                         type="number"
                         name="price"
                         id="price"
                         step="0.01"
                         value=product.price
-                        class="form-control") 
+                        class="form-control bg-dark text-light") 
                 .mb-3 
-                    label(for="desctiption") Description 
+                    label(for="desctiption" class="text-light") Description 
                     textarea(
                         name="description"
                         id="description"
                         rows="5"
-                        class="form-control") #{product.description}
+                        class="form-control bg-dark text-light") #{product.description}
                 input(
                     type="hidden"
                     value=product._id
                     name="productId")
-                button.btn(type="submit") Update product
+                button(type="submit" class="btn bg-dark") Update product
         else 
             form.product-form(
                 action="/admin/add-product" 
                 method="POST")
                 .mb-3 
-                    label(for="title") Title 
+                    label(for="title" class="text-light") Title 
                     input(
                         type="text"
                         name="title"
                         id="title"
-                        class="form-control")
+                        class="form-control bg-dark text-light")
                 .mb-3 
-                    label(for="imageUrl") Image URL 
+                    label(for="imageUrl" class="text-light") Image URL 
                     input(
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
                         value=""
-                        class="form-control")
+                        class="form-control bg-dark text-light")
                 .mb-3
-                    label(for="price") Price 
+                    label(for="price" class="text-light") Price 
                     input(
                         type="number"
                         name="price"
                         id="price"
                         step="0.01"
                         value=""
-                        class="form-control") 
+                        class="form-control bg-dark text-light") 
                 .mb-3
-                    label(for="desctiption") Description 
+                    label(for="desctiption" class="text-light") Description 
                     textarea(
                         name="description"
                         id="description"
                         rows="5"
-                        class="form-control")
-                button.btn(type="submit") Add product
+                        class="form-control bg-dark text-light")
+                button(type="submit" class="btn bg-dark") Add product
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js")

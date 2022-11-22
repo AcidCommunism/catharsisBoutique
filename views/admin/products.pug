@@ -12,7 +12,7 @@ block content
         if prods.length > 0
             div(class="d-flex flex-column flex-sm-row justify-content-evenly") 
                 each product in prods 
-                    div(class="card col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 border-light")
+                    div(class="card col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 border-dark bg-dark text-light")
                         div(class="card-header text-center") #{product.title}
                         img(
                             src=product.imageUrl,
@@ -25,7 +25,7 @@ block content
                             div(class="container text-center my-2")
                                 a(
                                     href="/admin/edit-product/" + product._id + "?edit=true"
-                                    class="btn") Edit 
+                                    class="btn bg-dark") Edit 
                             div(class="container text-center")
                                 form(
                                     action="/admin/delete-product"
@@ -34,7 +34,7 @@ block content
                                         type="hidden"
                                         name="productId"
                                         value=product._id)
-                                    button.btn(type="submit") Delete
+                                    button(type="submit" class="btn bg-dark") Delete
         else 
             h1 No products found!
 

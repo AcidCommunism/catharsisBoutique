@@ -12,7 +12,7 @@ block content
         if prods.length > 0
             div(class="d-flex flex-column flex-sm-row justify-content-evenly") 
                 each product in prods 
-                    div(class="card col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 border-light")
+                    div(class="card col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 border-dark bg-dark text-light")
                         div(class="card-header text-center") #{product.title}
                         img(src=product.imageUrl alt=product.title)
                         .card-body 
@@ -22,11 +22,11 @@ block content
                             div(class="container text-center my-2")
                                 a(
                                     href="/products/" + product._id
-                                    class="btn btn-outline-primary") Details
+                                    class="btn btn-outline-primary bg-dark") Details
                             div(class="container text-center")
                                 form(action="/cart" method="POST")
                                     button(
-                                        class="btn btn-outline-primary"
+                                        class="btn btn-outline-primary bg-dark"
                                         type="submit") Add to cart
                                     input(
                                         type="hidden"
