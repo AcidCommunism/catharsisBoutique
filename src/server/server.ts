@@ -64,22 +64,30 @@ class App {
     private _setStylesPaths() {
         logger.info('Setting styles paths...');
 
-        this.app.use(express.static(path.join(__dirname, '../../public')));
+        this.app.use(express.static(path.join(__dirname, '../../../public')));
         this.app.use(
             '/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
         );
         this.app.use(
             '/admin/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
         );
         this.app.use(
             '/admin/edit-product/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
         );
         this.app.use(
             '/products/bootstrap',
-            express.static(path.join(__dirname, '../../node_modules/bootstrap'))
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
         );
 
         logger.info('Styles paths are set!');
