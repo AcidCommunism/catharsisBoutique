@@ -4,20 +4,20 @@ block title
     title #{pageTitle} 
 
 block styles 
-    link(rel="stylesheet" href="/css/main.css")
+    link(rel="stylesheet" href="/scss/main.css")
 
 block content 
-    main 
+    main(class="text-center")
         if orders.length <= 0
-            h1 Nothing here! 
+            h1(class="text-light text-align-center") Nothing here!🙈
         else 
             ul.orders 
                 each order in orders 
-                    li.orders__item  
+                    div(class="orders__item text-light")
                         h1  # #{order._id}
-                        ul.orders__products
+                        div.orders__products
                             each product in order.items 
-                                li.orders__products-item #{product.title} (#{product.quantity})
+                                p.orders__products-item #{product.title} (#{product.quantity})
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js") 

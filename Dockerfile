@@ -14,4 +14,4 @@ COPY . .
 RUN tsc
 EXPOSE 3000
 ENTRYPOINT [ "node" ]
-CMD [ "./build/server/server.js" ]
+CMD [ "./build/src/server/server.js" ]

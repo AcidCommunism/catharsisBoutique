@@ -118,6 +118,7 @@ export class ShopController {
         res: express.Response,
         next: express.NextFunction
     ) => {
+        console.log(req.user);
         req?.user
             ?.addOrder()
             .then(() => res.redirect('/orders'))

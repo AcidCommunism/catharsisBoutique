@@ -7,19 +7,19 @@ block styles
     link(rel="stylesheet" href="/scss/main.css")
 
 block content 
-    main.centered 
-        h1 #{product.title} 
-        hr
-        div 
+    div(class="d-flex flex-column align-items-center m-3") 
+        div(class="card bg-dark" style="width: 24rem;")
+            div(class="card-header text-center text-light") #{product.title}
             img(
                 src=product.imageUrl
                 alt=product.title)
-        h2 #{product.price} $
-        p #{product.description}
-        .card__actions 
-            form(action="/cart" method="POST")
-                button.btn(type="submit") Add to Cart 
-                input(type="hidden" name="productId" value=product.id)
+            .card-body
+                h5(class="card-title text-center text-light") #{product.price} $
+                p(class="card-text text-center text-light") #{product.description}
+                .card__actions 
+                    form(action="/cart" method="POST")
+                        button(type="submit" class="btn bg-dark") Add to Cart 
+                        input(type="hidden" name="productId" value=product._id)
 
 block scripts 
     script(src="/js/main.js")
