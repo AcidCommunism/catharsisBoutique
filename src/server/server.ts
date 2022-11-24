@@ -152,7 +152,7 @@ class App {
                 );
                 next();
             })
-            .catch(err => console.log(err));
+            .catch(err => logger.error(err));
     }
 
     public listen() {
