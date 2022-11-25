@@ -21,19 +21,36 @@ export class AdminController {
         next: express.NextFunction
     ) => {
         const { title, imageUrl, price, description } = req.body;
-        const product = new Product(
-            title,
-            price,
-            description,
-            imageUrl,
-            null,
-            req?.user?._id!
-        );
+        const product = new Product({
+            title: title,
+            imageUrl: imageUrl,
+            price: price,
+            description: description,
+            userId: req.user,
+        });
         product
             .save()
-            .then(result => {
+            .then(() => {
                 logger.info('Created product');
                 res.redirect('/admin/products');
+            })
+            .catch(err => logger.error(err));
+    };
+
+    public getProducts = (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
+        Product.find()
+            .select('_id title imageUrl price')
+            // .populate('userId', 'name')
+            .then(products => {
+                res.render('admin/products', {
+                    prods: products,
+                    pageTitle: 'Admin Products',
+                    path: '/admin/products',
+                });
             })
             .catch(err => logger.error(err));
     };
@@ -71,33 +88,15 @@ export class AdminController {
     ) => {
         const { productId, title, imageUrl, price, description } = req.body;
 
-        const product = new Product(
-            title,
-            price,
-            description,
-            imageUrl,
-            productId,
-            req?.user?._id!
-        );
-        return product
-            .save()
-            .then(() => res.redirect('/admin/products'))
-            .catch(err => logger.error(err));
-    };
-
-    public getProducts = (
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-    ) => {
-        Product.fetchAll()
-            .then(products => {
-                res.render('admin/products', {
-                    prods: products,
-                    pageTitle: 'Admin Products',
-                    path: '/admin/products',
-                });
+        Product.findById(productId)
+            .then(product => {
+                product!.title = title;
+                product!.imageUrl = imageUrl;
+                product!.price = price;
+                product!.description = description;
+                return product?.save();
             })
+            .then(() => res.redirect('/admin/products'))
             .catch(err => logger.error(err));
     };
 
@@ -107,9 +106,7 @@ export class AdminController {
         next: express.NextFunction
     ) => {
         const prodId = req.body.productId;
-        Product.findById(prodId)
-            //@ts-ignore
-            .then(product => Product.deleteById(product!._id))
+        Product.findByIdAndRemove(prodId)
             .then(result => {
                 logger.info(`Deleted product with id: ${prodId}`);
                 res.redirect('/admin/products');

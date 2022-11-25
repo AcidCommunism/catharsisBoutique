@@ -13,12 +13,12 @@ block content
             div(class="d-flex flex-column align-items-center")
                 each item in products
                     div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3")
-                        h1.card-title #{item.title}
+                        h1.card-title #{item.productId.title}
                         p.card-text Quantity: #{item.quantity}
                         form(action="/cart-delete-item" method="POST")
                             input(
                                 type="hidden"
-                                value=item._id
+                                value=item.productId._id
                                 name="productId"
                                 )
                             button(class="btn danger bg-dark" type="submit") Delete

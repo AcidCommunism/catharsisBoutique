@@ -11,13 +11,12 @@ block content
         if orders.length <= 0
             h1(class="text-light text-align-center") Nothing here!🙈
         else 
-            ul.orders 
+            div(class="d-flex flex-column align-items-center")
                 each order in orders 
-                    div(class="orders__item text-light")
-                        h1  # #{order._id}
-                        div.orders__products
-                            each product in order.items 
-                                p.orders__products-item #{product.title} (#{product.quantity})
+                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3")
+                        h1.card-title Order # #{order._id}
+                        each item in order.products 
+                            p.card-text #{item.product.title} (#{item.quantity})
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js") 

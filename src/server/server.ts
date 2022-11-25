@@ -4,11 +4,13 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import { Db } from 'mongodb';
-import { DataBase } from './util/database';
+import mongoose from 'mongoose';
 import { AdminRouter } from './routes/admin';
 import { ShopRouter } from './routes/shop';
 import { ErrorController } from './controllers/error';
-import { User } from './models/user';
+
+import { loggerMiddleware } from './middlewares/request-logger';
+import { injectUser } from './middlewares/inject-user';
 
 dotenv.config({
     path: './src/server/.env',
@@ -33,21 +35,13 @@ class App {
         this._establishDbConnection();
     }
 
-    private _loggerMiddleware(
-        request: express.Request,
-        response: express.Response,
-        next: express.NextFunction
-    ) {
-        logger.info(`${request.method} ${request.path}`);
-        next();
-    }
-
     private _initMiddlewares() {
         logger.info('Initializing middlewares...');
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(this._loggerMiddleware);
-        this.app.use(this._injectUser);
+        this.app.use(loggerMiddleware);
+        // TODO: will be deleted after auth is implemented
+        this.app.use(injectUser);
 
         logger.info('Middlewares successfully initialized!');
     }
@@ -120,8 +114,9 @@ class App {
     private async _establishDbConnection() {
         try {
             logger.info('Establishing DB connection...');
-            const database = new DataBase();
-            this.dbConnection = await database.connect();
+            await mongoose.connect(
+                `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+            );
             logger.info('DB connection established!');
         } catch (error) {
             logger.error(
@@ -130,29 +125,6 @@ class App {
             logger.error(error);
             process.exit(1);
         }
-    }
-
-    // TODO: will be deleted after auth is implemented
-    private _injectUser(
-        request: express.Request,
-        response: express.Response,
-        next: express.NextFunction
-    ) {
-        User.findById('637c79ad6a70b0999b14ba09')
-            .then(user => {
-                request.user = new User(
-                    //@ts-ignore
-                    user!.name,
-                    //@ts-ignore
-                    user!.email,
-                    //@ts-ignore
-                    user!.cart,
-                    //@ts-ignore
-                    user!._id.toString()
-                );
-                next();
-            })
-            .catch(err => logger.error(err));
     }
 
     public listen() {
