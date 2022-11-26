@@ -1,0 +1,33 @@
+extends ../includes/head.pug
+
+block title 
+    title Sign in
+
+block styles
+    link(rel="stylesheet" href="/scss/main.css")
+
+block content 
+    div(class="d-flex flex-column align-items-center m-5")
+        div(class="card bg-dark w-auto")
+            form(class="px-4 py-3" action="/sign-up" method="POST")
+                div(class="mb-3")
+                    label(for="name" class="form-label text-light") Tell us your Name
+                    input(type="text" class="form-control bg-light bg-gradient border-dark" id="name" name="name" placeholder="John Doe Stevenson McNuggets Jr.")
+                div(class="mb-3")
+                    label(for="email" class="form-label text-light") Your email
+                    input(type="email" class="form-control bg-light bg-gradient border-dark" id="email" name="email" placeholder="email@example.com")
+                div(class="mb-3")
+                    label(for="password" class="form-labe text-light") Your password
+                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="password" name="password" placeholder="P@$$w0rd")
+                div(class="mb-3")
+                    label(for="confirmPassword" class="form-labe text-light") Confirm password
+                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="confirmPassword" name="confirmPassword" placeholder="C0nf1rm P@$$w0rd")
+                div(class="mb-3 d-flex flex-column align-items-center")
+                    button(class="btn btn-primary bg-dark" type="submit") Sign Up
+            div(class="card-body")
+                p(class="text-light") Already a member of our community? #[a(class="" href="/sign-in") Sign In!]
+
+
+block scripts 
+    script(src="/js/main.js")
+    script(src="bootstrap/dist/js/bootstrap.bundle.js")

@@ -19,20 +19,8 @@ block content
                             .card-body 
                                 h5(class="card-title text-center") #{product.price}$
                                 p(class="card-text text-center") #{product.description}
-                            div(class="container d-flex flex-column my-2")
-                                div(class="container text-center")
-                                    a(
-                                        href="/products/" + product._id
-                                        class="btn btn-outline-primary bg-dark") Details
-                                    form(action="/cart" method="POST")
-                                        button(
-                                            class="btn btn-outline-primary bg-dark"
-                                            type="submit") Add to cart
-                                        input(
-                                            type="hidden"
-                                            name="productId"
-                                            value=product._id
-                                            )
+
+                            include ../includes/product-card-actions.pug
         else 
             h1 No products Found!
 block scripts 

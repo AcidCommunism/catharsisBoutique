@@ -20,32 +20,51 @@ html(lang="en")
                     )
                     span.navbar-toggler-icon 
                 div(class="collapse navbar-collapse" id="navbarNav")
-                    ul(class="navbar-nav me-auto mb-2 mb-lg-0")
+                    ul(class="navbar-nav ma-auto mb-2 mb-lg-0")
                         li.nav-item 
                             a(
                                 class= path==='/' ? 'nav-link active': 'nav-link'
                                 href="/"
                             ) Shop
-                        li.nav-item 
-                            a(
-                                class= path==='/cart' ? 'nav-link active': 'nav-link'
-                                href="/cart"
-                            ) Cart
-                        li.nav-item 
-                            a(
-                                class= path==='/orders' ? 'nav-link active': 'nav-link'
-                                href="/orders"
-                            ) Orders
-                        li.nav-item 
-                            a(
-                                class= path==='/admin/products' ? 'nav-link active': 'nav-link'
-                                href="/admin/products"
-                            ) Admin products
-                        li.nav-item 
-                            a(
-                                class= path==='/admin/add-product' ? 'nav-link active': 'nav-link'
-                                href="/admin/add-product"
-                            ) Add product
+                        if isAuthenticated
+                            li.nav-item 
+                                a(
+                                    class= path==='/cart' ? 'nav-link active': 'nav-link'
+                                    href="/cart"
+                                ) Cart
+                            li.nav-item 
+                                a(
+                                    class= path==='/orders' ? 'nav-link active': 'nav-link'
+                                    href="/orders"
+                                ) Orders
+                            li.nav-item 
+                                a(
+                                    class= path==='/admin/products' ? 'nav-link active': 'nav-link'
+                                    href="/admin/products"
+                                ) Admin products
+                            li.nav-item 
+                                a(
+                                    class= path==='/admin/add-product' ? 'nav-link active': 'nav-link'
+                                    href="/admin/add-product"
+                                ) Add product
+                    ul(class="navbar-nav ms-auto mb-2 mb-lg-0")
+                        if isAuthenticated
+                            li(class="nav-item")  
+                                .nav-link.disabled Hi, #{user.name}!
+                            li(class="nav-item")                        
+                                form(action="/sign-out" method="POST")
+                                    button(class='btn nav-link' type='submit') Sign out
+                        else
+                            li(class="nav-item")
+                                a(
+                                    class= path==='/sign-in' ? 'nav-link active': 'nav-link'
+                                    href="/sign-in"
+                                ) Sign in
+                            li(class="nav-item")
+                                a(
+                                    class= path==='/sign-up' ? 'nav-link active': 'nav-link'
+                                    href="/sign-up"
+                                ) Sign up
         block content
         block footer
         block scripts 

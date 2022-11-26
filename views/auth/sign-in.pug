@@ -1,0 +1,32 @@
+extends ../includes/head.pug
+
+block title 
+    title Sign in
+
+block styles
+    link(rel="stylesheet" href="/scss/main.css")
+
+block content 
+    div(class="d-flex flex-column align-items-center m-5")
+        div(class="card bg-dark w-auto")
+            form(class="px-4 py-3" action="/sign-in" method="POST")
+                div(class="mb-3")
+                    label(for="email" class="form-label text-light") Email address
+                    input(type="email" class="form-control bg-light bg-gradient border-dark" id="email" name="email" placeholder="email@example.com")
+                div(class="mb-3")
+                    label(for="password" class="form-labe text-light") Password
+                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="password" name="password" placeholder="P@$$w0rd")
+                div(class="mb-3")
+                    div(class="form-check")
+                        input(type="checkbox" class="form-check-input text-light" id="dropdownCheck")
+                        label(class="form-check-label text-light" for="dropdownCheck") Remember me
+                div(class="mb-3 d-flex flex-column align-items-center")
+                    button(class="btn btn-primary bg-dark" type="submit") Sign In
+            div(class="card-body")
+                p(class="text-light") New around here? #[a(class="" href="/sign-up") Sign Up!]
+                a(class="" href="#") Forgot password?
+
+
+block scripts 
+    script(src="/js/main.js")
+    script(src="bootstrap/dist/js/bootstrap.bundle.js")

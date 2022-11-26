@@ -16,6 +16,8 @@ export class ShopController {
                     prods: products,
                     pageTitle: 'All Products',
                     path: '/products',
+                    isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 });
             })
             .catch(err => logger.error(err));
@@ -32,6 +34,8 @@ export class ShopController {
                     prods: products,
                     pageTitle: 'Shop',
                     path: '/',
+                    isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 });
             })
             .catch(err => logger.error(err));
@@ -50,6 +54,8 @@ export class ShopController {
                     //@ts-ignore
                     pageTitle: product!.title,
                     path: '/products',
+                    isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 });
             })
             .catch(err => logger.error(err));
@@ -67,6 +73,8 @@ export class ShopController {
                 path: '/cart',
                 pageTitle: 'Your cart',
                 products: user.cart.items,
+                isAuthenticated: req.session.isAuthenticated,
+                user: req.session.user,
             });
         });
     };
@@ -103,6 +111,8 @@ export class ShopController {
                     path: '/orders',
                     pageTitle: 'Your orders',
                     orders: orders,
+                    isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 })
             )
             .catch(err => logger.error(err));

@@ -10,7 +10,7 @@ const logConfig = {
         }),
         winston.format.printf(
             ({ timestamp, level, message, service, label }) => {
-                return `[${timestamp}] ${service} ${level}: ${label} ${JSON.stringify(
+                return `[${timestamp}] ${label}${service} ${level}: ${JSON.stringify(
                     message,
                     null,
                     4

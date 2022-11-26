@@ -208,4 +208,16 @@ form {
             color: white;
         }
     }
+    &.nav-link {
+        background-color: transparent !important;
+        border: 0 !important;
+        cursor: pointer !important;
+        display: inline !important;
+        outline: none !important;
+        text-decoration: none !important;
+    }
+    &.nav-link:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 }
