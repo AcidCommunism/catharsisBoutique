@@ -10,6 +10,7 @@ export class AuthRouter {
         this.router.get('/sign-in', this.authController.getSignIn);
         this.router.get('/sign-up', this.authController.getSignUp);
         this.router.post('/sign-in', this.authController.postSignIn);
+        this.router.post('/sign-up', this.authController.postSignUp);
         this.router.post('/sign-out', this.authController.postSignOut);
     }
 

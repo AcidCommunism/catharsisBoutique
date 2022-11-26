@@ -1,10 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 import { Product } from '../../types/Iproduct';
 import { CartItem } from '../../types/Icart';
+import { User as IUser } from '../../types/Iuser';
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
+    password: { type: String, required: true },
     cart: {
         items: [
             {
@@ -49,4 +51,4 @@ userSchema.methods.clearCart = function () {
     this.save();
 };
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model<IUser>('User', userSchema);
