@@ -26,17 +26,17 @@ html(lang="en")
                                 class= path==='/' ? 'nav-link active': 'nav-link'
                                 href="/"
                             ) Shop
-                        li.nav-item 
-                            a(
-                                class= path==='/cart' ? 'nav-link active': 'nav-link'
-                                href="/cart"
-                            ) Cart
-                        li.nav-item 
-                            a(
-                                class= path==='/orders' ? 'nav-link active': 'nav-link'
-                                href="/orders"
-                            ) Orders
                         if isAuthenticated
+                            li.nav-item 
+                                a(
+                                    class= path==='/cart' ? 'nav-link active': 'nav-link'
+                                    href="/cart"
+                                ) Cart
+                            li.nav-item 
+                                a(
+                                    class= path==='/orders' ? 'nav-link active': 'nav-link'
+                                    href="/orders"
+                                ) Orders
                             li.nav-item 
                                 a(
                                     class= path==='/admin/products' ? 'nav-link active': 'nav-link'
