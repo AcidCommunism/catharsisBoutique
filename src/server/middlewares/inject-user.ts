@@ -7,21 +7,13 @@ export function injectUser(
     response: express.Response,
     next: express.NextFunction
 ) {
-    User.findOne()
+    User.findById(request.session.user?._id)
         .then(user => {
-            if (!user) {
-                const user = new User({
-                    name: 'Max',
-                    email: 'max.zamota@gmail.com',
-                    cart: {
-                        items: [],
-                    },
-                });
-                user.save();
+            if (user) {
                 request.user = user;
                 next();
             } else {
-                request.user = user;
+                request.user = null;
                 next();
             }
         })

@@ -16,7 +16,6 @@ declare global {
     namespace Express {
         interface Request {
             user?: User;
-            isAuthenticated?: Boolean;
         }
     }
 }
@@ -24,5 +23,6 @@ declare global {
 declare module 'express-session' {
     interface SessionData {
         isAuthenticated?: Boolean;
+        user: User;
     }
 }

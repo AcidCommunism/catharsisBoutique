@@ -1,5 +1,6 @@
 import express from 'express';
 import { logger } from '../../logger';
+import { User } from '../models/user';
 
 export class AuthController {
     public getSignIn(
@@ -19,8 +20,23 @@ export class AuthController {
         res: express.Response,
         next: express.NextFunction
     ) {
-        req.session.isAuthenticated = true;
-        res.redirect('/');
+        User.findOne()
+            .then(user => {
+                if (!user) {
+                    user = new User({
+                        name: 'Max',
+                        email: 'max.zamota@gmail.com',
+                        cart: {
+                            items: [],
+                        },
+                    });
+                    user.save();
+                }
+                req.session.user = user;
+                req.session.isAuthenticated = true;
+                res.redirect('/');
+            })
+            .catch(err => logger.error(err));
     }
 
     public postSignOut(

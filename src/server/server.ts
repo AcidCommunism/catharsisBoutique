@@ -49,8 +49,6 @@ class App {
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(loggerMiddleware);
-        // TODO: will be deleted after auth is implemented
-        this.app.use(injectUser);
         this.app.use(
             session({
                 secret: 'my secret',
@@ -59,6 +57,7 @@ class App {
                 store: this.sessionStorage,
             })
         );
+        this.app.use(injectUser);
 
         logger.info('Middlewares successfully initialized!');
     }
