@@ -9,11 +9,20 @@ declare global {
             DB_NAME: string;
             DB_USER: string;
             DB_PWD: string;
+            DB_SESSION_COLLECTION: string;
         }
     }
+
     namespace Express {
         interface Request {
             user?: User;
+            isAuthenticated?: Boolean;
         }
+    }
+}
+
+declare module 'express-session' {
+    interface SessionData {
+        isAuthenticated?: Boolean;
     }
 }

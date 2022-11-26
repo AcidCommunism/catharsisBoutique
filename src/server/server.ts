@@ -2,11 +2,13 @@ import path from 'path';
 import { logger } from '../logger';
 import * as dotenv from 'dotenv';
 import express from 'express';
+import session from 'express-session';
+import ConnectMongoDBSession from 'connect-mongodb-session';
 import * as bodyParser from 'body-parser';
-import { Db } from 'mongodb';
 import mongoose from 'mongoose';
 import { AdminRouter } from './routes/admin';
 import { ShopRouter } from './routes/shop';
+import { AuthRouter } from './routes/auth';
 import { ErrorController } from './controllers/error';
 
 import { loggerMiddleware } from './middlewares/request-logger';
@@ -17,9 +19,10 @@ dotenv.config({
 });
 
 class App {
-    public app: express.Application;
-    public port: number;
-    public dbConnection: Db | undefined;
+    private app: express.Application;
+    private port: number;
+    private mongoConnectionString: string;
+    private sessionStorage: ConnectMongoDBSession.MongoDBStore;
 
     constructor(
         routers: { name?: string; path?: string; router: express.Router }[],
@@ -27,6 +30,12 @@ class App {
     ) {
         this.app = express();
         this.port = port;
+        this.mongoConnectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
+        const MongoDbStore = ConnectMongoDBSession(session);
+        this.sessionStorage = new MongoDbStore({
+            uri: this.mongoConnectionString,
+            collection: process.env.DB_SESSION_COLLECTION,
+        });
         this._setViewsEngine();
         this._setStylesPaths();
         this._initMiddlewares();
@@ -42,6 +51,14 @@ class App {
         this.app.use(loggerMiddleware);
         // TODO: will be deleted after auth is implemented
         this.app.use(injectUser);
+        this.app.use(
+            session({
+                secret: 'my secret',
+                resave: false,
+                saveUninitialized: false,
+                store: this.sessionStorage,
+            })
+        );
 
         logger.info('Middlewares successfully initialized!');
     }
@@ -115,7 +132,7 @@ class App {
         try {
             logger.info('Establishing DB connection...');
             await mongoose.connect(
-                `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+                this.mongoConnectionString + '?retryWrites=true&w=majority'
             );
             logger.info('DB connection established!');
         } catch (error) {
@@ -145,6 +162,10 @@ const server = new App(
         {
             name: 'Shop router',
             router: new ShopRouter().get(),
+        },
+        {
+            name: 'Auth router',
+            router: new AuthRouter().get(),
         },
     ],
     process.env.SERVER_LISTENING_PORT
