@@ -13,6 +13,7 @@ export class AdminController {
             path: '/admin/add-product',
             editing: false,
             isAuthenticated: req.session.isAuthenticated,
+            user: req.session.user,
         });
     };
 
@@ -29,6 +30,7 @@ export class AdminController {
             description: description,
             userId: req.user,
             isAuthenticated: req.session.isAuthenticated,
+            user: req.session.user,
         });
         product
             .save()
@@ -53,6 +55,7 @@ export class AdminController {
                     pageTitle: 'Admin Products',
                     path: '/admin/products',
                     isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 });
             })
             .catch(err => logger.error(err));
@@ -80,6 +83,7 @@ export class AdminController {
                     editing: editMode,
                     product: product,
                     isAuthenticated: req.session.isAuthenticated,
+                    user: req.session.user,
                 });
             })
             .catch(err => logger.error(err));

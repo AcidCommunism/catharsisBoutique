@@ -12,6 +12,20 @@ export class AuthController {
             path: '/sign-in',
             pageTitle: 'Sign in',
             isAuthenticated: req.session.isAuthenticated,
+            user: req.session.user,
+        });
+    }
+
+    public getSignUp(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        res.render('auth/sign-up', {
+            path: '/sign-up',
+            pageTitle: 'Sign up',
+            isAuthenticated: req.session.isAuthenticated,
+            user: req.session.user,
         });
     }
 
@@ -34,7 +48,12 @@ export class AuthController {
                 }
                 req.session.user = user;
                 req.session.isAuthenticated = true;
-                res.redirect('/');
+                req.session.save(err => {
+                    if (err) {
+                        logger.error(err);
+                    }
+                    res.redirect('/');
+                });
             })
             .catch(err => logger.error(err));
     }

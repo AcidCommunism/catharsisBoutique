@@ -9,22 +9,20 @@ block styles
 block content 
     div(class="d-flex flex-column align-items-center m-5")
         div(class="card bg-dark w-auto")
-            form(class="px-4 py-3" action="/sign-in" method="POST")
+            form(class="px-4 py-3" action="/sign-up" method="POST")
                 div(class="mb-3")
-                    label(for="formEmail" class="form-label text-light") Email address
+                    label(for="formEmail" class="form-label text-light") Your email
                     input(type="email" class="form-control bg-light bg-gradient border-dark" id="formEmail" placeholder="email@example.com")
                 div(class="mb-3")
-                    label(for="formPassword" class="form-labe text-light") Password
+                    label(for="formPassword" class="form-labe text-light") Your password
                     input(type="password" class="form-control bg-light bg-gradient border-dark" id="formPassword" placeholder="P@$$w0rd")
                 div(class="mb-3")
-                    div(class="form-check")
-                        input(type="checkbox" class="form-check-input text-light" id="dropdownCheck")
-                        label(class="form-check-label text-light" for="dropdownCheck") Remember me
+                    label(for="formPassword" class="form-labe text-light") Confirm password
+                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="formPassword" placeholder="P@$$w0rd")
                 div(class="mb-3 d-flex flex-column align-items-center")
-                    button(class="btn btn-primary bg-dark" type="submit") Sign In
+                    button(class="btn btn-primary bg-dark" type="submit") Sign Up
             div(class="card-body")
-                p(class="text-light") New around here? #[a(class="" href="/sign-up") Sign Up!]
-                a(class="" href="#") Forgot password?
+                p(class="text-light") Already a member of our community? #[a(class="" href="/sign-in") Sign In!]
 
 
 block scripts 

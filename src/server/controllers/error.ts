@@ -10,6 +10,7 @@ export class ErrorController {
             pageTitle: 'Page Not Found',
             path: '/404',
             isAuthenticated: req.session.isAuthenticated,
+            user: req.session.user,
         });
     };
 }
