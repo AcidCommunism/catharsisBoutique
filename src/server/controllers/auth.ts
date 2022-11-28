@@ -49,7 +49,7 @@ export class AuthController {
                             return req.session.save(() => {
                                 req.flash(
                                     'success',
-                                    `Hello, ${user.name}!\n<p>It is nice to see you!</p>`
+                                    `Hello, ${user.name}!\n<p>It is nice to see you!🙃</p>`
                                 );
                                 res.redirect('/');
                             });
