@@ -57,7 +57,7 @@ export class AuthController {
                         req.flash(
                             'error',
                             "Oh-oh! Username/password don't match🙊\n" +
-                                '<p>Try again?</p>'
+                                '<p>Try again?</p><p>Or perhaps you <a href="#">forgot it</a>?</p>'
                         );
                         res.redirect('/sign-in');
                     });
