@@ -32,9 +32,13 @@ block content
                                         method="POST")
                                         input(
                                             type="hidden"
+                                            value=csrfToken
+                                            name="_csrf")
+                                        input(
+                                            type="hidden"
                                             name="productId"
                                             value=product._id)
-                                        button(type="submit" class="btn bg-dark") Delete
+                                        button(type="submit" class="btn danger bg-dark") Delete
         else 
             h1 No products found!
 

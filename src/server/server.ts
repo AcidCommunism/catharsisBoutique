@@ -1,18 +1,22 @@
 import path from 'path';
-import { logger } from '../logger';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
 import ConnectMongoDBSession from 'connect-mongodb-session';
 import * as bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import csurf from 'csurf';
+import flash from 'connect-flash';
+
+import { logger } from '../logger';
+import { loggerMiddleware } from './middlewares/request-logger';
+import { injectUser } from './middlewares/inject-user';
+import { injectCsrfToken } from './middlewares/csrf';
+import { flashMessagesMiddleware } from './middlewares/flash-messages';
 import { AdminRouter } from './routes/admin';
 import { ShopRouter } from './routes/shop';
 import { AuthRouter } from './routes/auth';
 import { ErrorController } from './controllers/error';
-
-import { loggerMiddleware } from './middlewares/request-logger';
-import { injectUser } from './middlewares/inject-user';
 
 dotenv.config({
     path: './src/server/.env',
@@ -38,17 +42,17 @@ class App {
         });
         this._setViewsEngine();
         this._setStylesPaths();
+        this._configureServer();
         this._initMiddlewares();
         this._initRouters(routers);
         this._initDefaultControllers();
         this._establishDbConnection();
     }
 
-    private _initMiddlewares() {
-        logger.info('Initializing middlewares...');
+    private _configureServer() {
+        logger.info('Configuring server...');
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(loggerMiddleware);
         this.app.use(
             session({
                 secret: 'my secret',
@@ -57,7 +61,19 @@ class App {
                 store: this.sessionStorage,
             })
         );
+        this.app.use(csurf());
+        this.app.use(flash());
+
+        logger.info('Server configuration complete!');
+    }
+
+    private _initMiddlewares() {
+        logger.info('Initializing middlewares...');
+
+        this.app.use(loggerMiddleware);
         this.app.use(injectUser);
+        this.app.use(injectCsrfToken);
+        this.app.use(flashMessagesMiddleware);
 
         logger.info('Middlewares successfully initialized!');
     }

@@ -12,7 +12,6 @@ export class AuthController {
         res.render('auth/sign-in', {
             path: '/sign-in',
             pageTitle: 'Sign in',
-            isAuthenticated: req.session.isAuthenticated,
             user: req.session.user,
         });
     }
@@ -25,7 +24,6 @@ export class AuthController {
         res.render('auth/sign-up', {
             path: '/sign-up',
             pageTitle: 'Sign up',
-            isAuthenticated: req.session.isAuthenticated,
             user: req.session.user,
         });
     }
@@ -39,7 +37,8 @@ export class AuthController {
         User.findOne({ email: email })
             .then(user => {
                 if (!user) {
-                    return res.redirect('/sign-up');
+                    req.flash('error', 'User not found🙊');
+                    return res.redirect('/sign-in');
                 }
                 bcryptjs
                     .compare(password, user.password.toString())

@@ -53,6 +53,10 @@ html(lang="en")
                                 .nav-link.disabled Hi, #{user.name}!
                             li(class="nav-item")                        
                                 form(action="/sign-out" method="POST")
+                                    input(
+                                        type="hidden"
+                                        value=csrfToken
+                                        name="_csrf")
                                     button(class='btn nav-link' type='submit') Sign out
                         else
                             li(class="nav-item")

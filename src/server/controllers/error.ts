@@ -9,7 +9,6 @@ export class ErrorController {
         res.status(404).render('404', {
             pageTitle: 'Page Not Found',
             path: '/404',
-            isAuthenticated: req.session.isAuthenticated,
             user: req.session.user,
         });
     };

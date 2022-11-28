@@ -197,12 +197,12 @@ form {
 }
 
 .btn.danger {
-  color: red;
-  border-color: red;
+  color: #a80f0f;
+  border-color: #a80f0f;
 }
 
 .btn.danger:hover, .btn.danger:active {
-  background: red;
+  background: #a80f0f;
   color: white;
 }
 
@@ -218,5 +218,10 @@ form {
 .btn.nav-link:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.toast.error > .toast-header {
+  background-color: #a80f0f;
+  color: azure;
 }
 /*# sourceMappingURL=main.css.map */

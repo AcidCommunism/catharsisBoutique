@@ -51,6 +51,10 @@ block content
                     type="hidden"
                     value=product._id
                     name="productId")
+                input(
+                    type="hidden"
+                    value=csrfToken
+                    name="_csrf")
                 button(type="submit" class="btn bg-dark border-dark") Update product
         else 
             form.product-form(
@@ -87,6 +91,10 @@ block content
                         id="description"
                         rows="5"
                         class="form-control bg-dark text-light border-dark")
+                input(
+                    type="hidden"
+                    value=csrfToken
+                    name="_csrf")
                 button(type="submit" class="btn bg-dark") Add product
 block scripts 
     script(src="/js/main.js")
