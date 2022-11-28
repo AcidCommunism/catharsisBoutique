@@ -9,6 +9,7 @@ block styles
 
 block content 
     main 
+        include ../includes/success-messages.pug
         if prods.length > 0
             div(class="row row-cols-1 row-cols-md-3 g-4 align-items-top") 
                 each product in prods

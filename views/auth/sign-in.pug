@@ -7,17 +7,7 @@ block styles
     link(rel="stylesheet" href="/styles/main.css")
 
 block content 
-    if errorMessages && errorMessages.length
-        div(aria-live="polite" aria-atomic="true" class="d-flex flex-column justify-content-center align-items-center m-3")
-            each error in errorMessages
-                div(class="toast error bg-dark text-light" role="error" aria-live="assertive" aria-atomic="true")
-                    div(class="toast-header")
-                        strong(class="me-auto") Oppsie-woopsie
-                        small Just now
-                        button(type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close")
-                    div(class="toast-body") 
-                        p Someone made a faki-waki: 
-                        p(class='text-danger text-center') #{error}
+    include ../includes/error-messages.pug
     div(class="d-flex flex-column align-items-center m-5")
         div(class="card bg-dark w-auto")
             form(class="px-4 py-3" action="/sign-in" method="POST")

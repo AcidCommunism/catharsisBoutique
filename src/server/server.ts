@@ -26,7 +26,7 @@ class App {
     private app: express.Application;
     private port: number;
     private mongoConnectionString: string;
-    private sessionStorage: ConnectMongoDBSession.MongoDBStore;
+    private sessionStorage!: ConnectMongoDBSession.MongoDBStore;
 
     constructor(
         routers: { name?: string; path?: string; router: express.Router }[],
@@ -35,11 +35,6 @@ class App {
         this.app = express();
         this.port = port;
         this.mongoConnectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
-        const MongoDbStore = ConnectMongoDBSession(session);
-        this.sessionStorage = new MongoDbStore({
-            uri: this.mongoConnectionString,
-            collection: process.env.DB_SESSION_COLLECTION,
-        });
         this._setViewsEngine();
         this._setStylesPaths();
         this._configureServer();
@@ -52,6 +47,11 @@ class App {
     private _configureServer() {
         logger.info('Configuring server...');
 
+        const MongoDbStore = ConnectMongoDBSession(session);
+        this.sessionStorage = new MongoDbStore({
+            uri: this.mongoConnectionString,
+            collection: process.env.DB_SESSION_COLLECTION,
+        });
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(
             session({

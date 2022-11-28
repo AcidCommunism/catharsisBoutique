@@ -6,6 +6,8 @@ export function flashMessagesMiddleware(
     next: express.NextFunction
 ) {
     response.locals.successMessages = request.flash('success');
-    response.locals.errorMessages = request.flash('error');
+    response.locals.errorMessages = request
+        .flash('error')
+        .filter(msg => msg !== null || msg !== '');
     next();
 }

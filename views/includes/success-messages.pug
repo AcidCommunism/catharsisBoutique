@@ -1,0 +1,10 @@
+if successMessages && successMessages.length
+    div(aria-live="polite" aria-atomic="true" class="d-flex flex-column justify-content-center align-items-center" id="successMessages")
+        each msg in successMessages
+            div(class="toast bg-dark text-light m-3" role="success" aria-live="assertive" aria-atomic="true")
+                div(class="toast-header")
+                    strong(class="me-auto") Sup
+                    small Just now
+                    button(type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close")
+                div(class="toast-body") 
+                    p(class='text-danger text-center') !{msg}

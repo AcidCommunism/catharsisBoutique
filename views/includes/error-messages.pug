@@ -1,0 +1,11 @@
+if errorMessages && errorMessages.length
+    div(aria-live="polite" aria-atomic="true" class="d-flex flex-column justify-content-center align-items-center" id="errorMessages")
+        each error in errorMessages
+            div(class="toast error bg-dark text-light m-3" role="error" aria-live="assertive" aria-atomic="true")
+                div(class="toast-header")
+                    strong(class="me-auto") Oopsie-woopsie
+                    small Just now
+                    button(type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close")
+                div(class="toast-body") 
+                    p Someone made a faki-waki: 
+                    p(class='text-danger text-center') !{error}

@@ -47,9 +47,18 @@ export class AuthController {
                             req.session.user = user;
                             req.session.isAuthenticated = true;
                             return req.session.save(() => {
+                                req.flash(
+                                    'success',
+                                    `Hello, ${user.name}!\n<p>It is nice to see you!</p>`
+                                );
                                 res.redirect('/');
                             });
                         }
+                        req.flash(
+                            'error',
+                            "Oh-oh! Username/password don't match🙊\n" +
+                                '<p>Try again?</p>'
+                        );
                         res.redirect('/sign-in');
                     });
             })
@@ -65,7 +74,13 @@ export class AuthController {
         User.findOne({ email: email })
             .then(user => {
                 if (user) {
-                    return res.redirect('/sign-in');
+                    req.flash(
+                        'error',
+                        'Hmm!🤔 Looks like user with such email already exists...\n' +
+                            '<p>If you are a user already, you can <a href="/sign-in">sign in</a>.</p>' +
+                            '<p>Or perhaps we can <a href="#">remind you your password</a> if you want?</p>'
+                    );
+                    return res.redirect('/sign-up');
                 }
                 return bcryptjs.hash(password, 12).then(passwordHash => {
                     const newUser = new User({
@@ -77,7 +92,13 @@ export class AuthController {
                     newUser.save(() => res.redirect('/sign-in'));
                 });
             })
-            .catch(err => logger.error(err));
+            .catch(err => {
+                logger.error(err);
+                req.flash(
+                    'Something went unexpectedly wrong. Details:\n' +
+                        `<p>${err}</p>`
+                );
+            });
     }
 
     public postSignOut(
