@@ -8,7 +8,7 @@ block styles
     link(rel="stylesheet" href="/styles/product.css")
 
 block content 
-    main 
+    main(class="text-center")
         if prods.length > 0
             div(class="row row-cols-1 row-cols-md-3 g-4 align-items-top") 
                 each product in prods 
@@ -40,7 +40,7 @@ block content
                                             value=product._id)
                                         button(type="submit" class="btn danger bg-dark") Delete
         else 
-            h1 No products found!
+            h1(class="text-light text-align-center") No products here (yet?)
 
 
 block scripts 

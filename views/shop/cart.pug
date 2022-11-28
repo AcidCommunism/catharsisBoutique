@@ -8,7 +8,7 @@ block styles
     link(rel="stylesheet" href="/styles/cart.css")
 
 block content
-    main 
+    main(class="text-center")
         if products.length > 0
             div(class="d-flex flex-column align-items-center")
                 each item in products
@@ -35,8 +35,7 @@ block content
                         name="_csrf")
                     button(type="submit" class="btn bg-dark") Checkout 
         else
-            main(class="text-center")
-                h1(class="text-light text-align-center") No products in Cart!
+            h1(class="text-light text-align-center") Looks like your car is empty🤔
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js") 
