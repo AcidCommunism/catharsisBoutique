@@ -1,4 +1,5 @@
 import { check, body } from 'express-validator/check';
+import { User } from '../../models/user';
 import { BlackListDomainsHelper } from '../../util/helpers/blacklist-domains';
 
 export function signUpValidation() {
@@ -14,6 +15,18 @@ export function signUpValidation() {
                     }
                 });
                 return true;
+            })
+            .custom((value, { req }) => {
+                return User.findOne({ email: value }).then(user => {
+                    if (user) {
+                        return Promise.reject(
+                            `
+                            User with e-mail <a href="mailto:${value}">${value}</a> already exists.
+                            <p>Please pick a different one or <a href="/auth/reset-pwd">reset</a> your password.</p>
+                            `
+                        );
+                    }
+                });
             }),
         body(
             ['password'],

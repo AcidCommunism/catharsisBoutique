@@ -42,7 +42,15 @@ export class AuthController {
             .then(user => {
                 if (!user) {
                     req.flash('error', 'User not found🙊');
-                    return res.redirect('/auth/sign-in');
+                    return res.status(422).render('auth/sign-in', {
+                        path: '/auth/sign-in',
+                        pageTitle: 'Sign in',
+                        user: req.session.user,
+                        previousInput: {
+                            email: email,
+                            password: password,
+                        },
+                    });
                 }
                 bcryptjs
                     .compare(password, user.password.toString())
@@ -63,7 +71,15 @@ export class AuthController {
                             "Oh-oh! Username/password don't match🙊\n" +
                                 '<p>Try again?</p><p>Or perhaps you need a <a href="/auth/reset-pwd">password reset</a>?</p>'
                         );
-                        res.redirect('/auth/sign-in');
+                        res.status(422).render('auth/sign-in', {
+                            path: '/auth/sign-in',
+                            pageTitle: 'Sign in',
+                            user: req.session.user,
+                            previousInput: {
+                                email: email,
+                                password: password,
+                            },
+                        });
                     });
             })
             .catch(err => logger.error(err));
@@ -78,17 +94,24 @@ export class AuthController {
         const validationErrors = validationResult(req);
         if (!validationErrors.isEmpty()) {
             console.log(validationErrors);
-            validationErrors.array().forEach(err =>
-                req.flash(
-                    'error',
-                    `Error in field "${err.param}"!<p>${err.msg}</p>
-                        `
-                )
-            );
+            validationErrors
+                .array()
+                .forEach(err =>
+                    req.flash(
+                        'error',
+                        `Error in field "${err.param}"!<p>${err.msg}</p>`
+                    )
+                );
             return res.status(422).render('auth/sign-up', {
                 path: '/auth/sign-up',
                 pageTitle: 'Sign up',
                 user: req.session.user,
+                previousInput: {
+                    name: name,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                },
             });
         }
 
