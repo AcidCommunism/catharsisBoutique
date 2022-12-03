@@ -251,8 +251,8 @@ export class AuthController {
                     updatedUser!.email.toString(),
                     `${process.env.SHOP_NAME} shop - your password successfully updated!`,
                     `
-                    <h1>Sup ${updatedUser?.name}!</h1><p>We just wanted to tell you, that your password been successfully updated.</p>
-                    <p>All the best - ${process.env.SHOP_NAME} team.</p>
+                    <h1>Sup ${updatedUser?.name}!</h1><p>We just wanted to tell you, that your password has been successfully updated.</p>
+                    <p>All the best,\n<em>${process.env.SHOP_NAME} team.</em></p>
                     `
                 )
             )
