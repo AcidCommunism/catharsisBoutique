@@ -10,7 +10,7 @@ block content
     include ../includes/error-messages.pug
     div(class="d-flex flex-column align-items-center m-5")
         div(class="card bg-dark w-auto")
-            form(class="px-4 py-3" action="/auth/sign-up" method="POST")
+            form(class="px-4 py-3" action="/auth/sign-up" method="POST" novalidate)
                 div(class="mb-3")
                     label(for="name" class="form-label text-light") Tell us your Name
                     input(type="text" class="form-control bg-light bg-gradient border-dark" id="name" name="name" placeholder="John Doe Stevenson McNuggets Jr.")

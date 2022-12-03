@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Mailer } from '../util/mailer';
 import crypto from 'crypto';
 import { User as IUser } from '../../types/Iuser';
+import { validationResult } from 'express-validator/check';
 
 export class AuthController {
     public getSignIn(
@@ -74,6 +75,24 @@ export class AuthController {
         next: express.NextFunction
     ) {
         const { name, email, password, confirmPassword } = req.body;
+        const validationErrors = validationResult(req);
+        if (!validationErrors.isEmpty()) {
+            console.log(validationErrors);
+            validationErrors.array().forEach(err =>
+                req.flash(
+                    'error',
+                    `Error in field "${err.param}"!<p>"${err.value}" - ${err.msg}</p>
+                        <p>Please enter a valid ${err.param}.</p>
+                        `
+                )
+            );
+            return res.status(422).render('auth/sign-up', {
+                path: '/auth/sign-up',
+                pageTitle: 'Sign up',
+                user: req.session.user,
+            });
+        }
+
         User.findOne({ email: email })
             .then(user => {
                 if (user) {
