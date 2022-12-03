@@ -81,8 +81,7 @@ export class AuthController {
             validationErrors.array().forEach(err =>
                 req.flash(
                     'error',
-                    `Error in field "${err.param}"!<p>"${err.value}" - ${err.msg}</p>
-                        <p>Please enter a valid ${err.param}.</p>
+                    `Error in field "${err.param}"!<p>${err.msg}</p>
                         `
                 )
             );

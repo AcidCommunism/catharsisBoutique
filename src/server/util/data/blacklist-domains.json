@@ -1,0 +1,6 @@
+{
+    "blacklistDomains": [
+        "test.com",
+        "test.io"
+    ]
+}
