@@ -44,7 +44,7 @@ export class AdminController {
         res: express.Response,
         next: express.NextFunction
     ) => {
-        Product.find()
+        Product.find({ userId: req.session.user._id })
             .select('_id title imageUrl price')
             // .populate('userId', 'name')
             .then(products => {
@@ -74,6 +74,12 @@ export class AdminController {
                 if (!product) {
                     return res.redirect('/');
                 }
+                if (
+                    product?.userId?.toString() !==
+                    req.session.user._id.toString()
+                ) {
+                    return res.redirect('/');
+                }
                 res.render('admin/edit-product', {
                     pageTitle: 'Edit Product',
                     path: '/admin/edit-product',
@@ -94,13 +100,20 @@ export class AdminController {
 
         Product.findById(productId)
             .then(product => {
+                if (
+                    product?.userId?.toString() !==
+                    req.session.user._id.toString()
+                ) {
+                    return res.redirect('/');
+                }
                 product!.title = title;
                 product!.imageUrl = imageUrl;
                 product!.price = price;
                 product!.description = description;
-                return product?.save();
+                return product
+                    ?.save()
+                    .then(() => res.redirect('/admin/products'));
             })
-            .then(() => res.redirect('/admin/products'))
             .catch(err => logger.error(err));
     };
 
@@ -110,7 +123,7 @@ export class AdminController {
         next: express.NextFunction
     ) => {
         const prodId = req.body.productId;
-        Product.findByIdAndRemove(prodId)
+        Product.deleteOne({ _id: prodId, userId: req.session.user._id })
             .then(result => {
                 logger.info(`Deleted product with id: ${prodId}`);
                 res.redirect('/admin/products');

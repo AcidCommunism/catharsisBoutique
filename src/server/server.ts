@@ -9,6 +9,7 @@ import csurf from 'csurf';
 import flash from 'connect-flash';
 
 import { logger } from '../logger';
+import { Mailer } from './util/mailer';
 import { loggerMiddleware } from './middlewares/request-logger';
 import { injectUser } from './middlewares/inject-user';
 import { injectCsrfToken } from './middlewares/csrf';
@@ -27,6 +28,7 @@ class App {
     private port: number;
     private mongoConnectionString: string;
     private sessionStorage!: ConnectMongoDBSession.MongoDBStore;
+    private mailer!: Mailer;
 
     constructor(
         routers: { name?: string; path?: string; router: express.Router }[],
@@ -63,6 +65,7 @@ class App {
         );
         this.app.use(csurf());
         this.app.use(flash());
+        this.mailer = new Mailer();
 
         logger.info('Server configuration complete!');
     }
@@ -105,6 +108,18 @@ class App {
         );
         this.app.use(
             '/admin/edit-product/bootstrap',
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
+        );
+        this.app.use(
+            '/auth/bootstrap',
+            express.static(
+                path.join(__dirname, '../../../node_modules/bootstrap')
+            )
+        );
+        this.app.use(
+            '/auth/update-pwd/bootstrap',
             express.static(
                 path.join(__dirname, '../../../node_modules/bootstrap')
             )
@@ -180,6 +195,7 @@ const server = new App(
         },
         {
             name: 'Auth router',
+            path: '/auth',
             router: new AuthRouter().get(),
         },
     ],

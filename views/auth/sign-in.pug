@@ -7,10 +7,11 @@ block styles
     link(rel="stylesheet" href="/styles/main.css")
 
 block content 
+    include ../includes/success-messages.pug
     include ../includes/error-messages.pug
     div(class="d-flex flex-column align-items-center m-5")
         div(class="card bg-dark w-auto")
-            form(class="px-4 py-3" action="/sign-in" method="POST")
+            form(class="px-4 py-3" action="/auth/sign-in" method="POST")
                 div(class="mb-3")
                     label(for="email" class="form-label text-light") Email address
                     input(type="email" class="form-control bg-light bg-gradient border-dark" id="email" name="email" placeholder="email@example.com")
@@ -28,8 +29,8 @@ block content
                         name="_csrf")
                     button(class="btn btn-primary bg-dark" type="submit") Sign In
             div(class="card-body")
-                p(class="text-light") New around here? #[a(class="" href="/sign-up") Sign Up!]
-                a(class="" href="#") Forgot password?
+                p(class="text-light") New around here? #[a(class="" href="/auth/sign-up") Sign Up!]
+                a(class="" href="/auth/reset-pwd") Forgot password?
 
 
 block scripts 
