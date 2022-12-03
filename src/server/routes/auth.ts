@@ -12,6 +12,13 @@ export class AuthRouter {
         this.router.post('/sign-in', this.authController.postSignIn);
         this.router.post('/sign-up', this.authController.postSignUp);
         this.router.post('/sign-out', this.authController.postSignOut);
+        this.router.get('/reset-pwd', this.authController.getResetPassword);
+        this.router.post('/reset-pwd', this.authController.postResetPassword);
+        this.router.get(
+            '/update-pwd/:token',
+            this.authController.getUpdatePassword
+        );
+        this.router.post('/update-pwd', this.authController.postNewPassword);
     }
 
     public get() {

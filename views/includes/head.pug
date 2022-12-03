@@ -52,7 +52,7 @@ html(lang="en")
                             li(class="nav-item")  
                                 .nav-link.disabled Hi, #{user.name}!
                             li(class="nav-item")                        
-                                form(action="/sign-out" method="POST")
+                                form(action="/auth/sign-out" method="POST")
                                     input(
                                         type="hidden"
                                         value=csrfToken
@@ -61,13 +61,13 @@ html(lang="en")
                         else
                             li(class="nav-item")
                                 a(
-                                    class= path==='/sign-in' ? 'nav-link active': 'nav-link'
-                                    href="/sign-in"
+                                    class= path==='/auth/sign-in' ? 'nav-link active': 'nav-link'
+                                    href="/auth/sign-in"
                                 ) Sign in
                             li(class="nav-item")
                                 a(
-                                    class= path==='/sign-up' ? 'nav-link active': 'nav-link'
-                                    href="/sign-up"
+                                    class= path==='/auth/sign-up' ? 'nav-link active': 'nav-link'
+                                    href="/auth/sign-up"
                                 ) Sign up
         block content
         block footer

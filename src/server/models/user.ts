@@ -3,10 +3,12 @@ import { Product } from '../../types/Iproduct';
 import { CartItem } from '../../types/Icart';
 import { User as IUser } from '../../types/Iuser';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<IUser>({
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    resetToken: String,
+    resetTokenExpiration: Date,
     cart: {
         items: [
             {
