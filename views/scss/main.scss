@@ -55,6 +55,14 @@ form {
         backdrop-filter: blur(19px);
         border-radius: 10px !important;
     }
+    &-toggler,
+    &-toggler:focus,
+    &-toggler:active,
+    &-toggler-icon:focus,
+    &-toggler-icon:active {
+        border: none !important;
+        outline: none !important;
+    }
 }
 
 .main-header {
