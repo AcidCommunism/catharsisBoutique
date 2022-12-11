@@ -33,7 +33,7 @@
 
 body {
     font-weight: getFontWeight();
-    background-color: rgb(42, 46, 46);
+    background-image: url('/images/wepik-photo-mode-20221112-2322.jpeg');
 }
 
 main {
@@ -46,6 +46,15 @@ form {
 
 .centered {
     text-align: center;
+}
+
+.navbar {
+    &.bg-dark {
+        background: rgba(0, 0, 0, 0.41) !important;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+        backdrop-filter: blur(19px);
+        border-radius: 10px !important;
+    }
 }
 
 .main-header {
@@ -154,6 +163,12 @@ form {
 
 .card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    &.bg-dark {
+        background: rgba(0, 0, 0, 0.24) !important;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+        backdrop-filter: blur(19px);
+        border-radius: 10px !important;
+    }
     &__header {
         padding: 1rem;
         h1 {
