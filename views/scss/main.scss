@@ -52,6 +52,10 @@ form {
     animation: flicker 1.5s infinite alternate;
 }
 
+.text-success {
+    animation: pulsateSuccess 2.5s infinite alternate;
+}
+
 .border-danger {
     animation: pulsate 2.5s infinite alternate;
     border: 0px solid #fff;

@@ -7,6 +7,7 @@ $font-weights: (
 $default-padding: 1rem;
 $accent-yellowish: #ffeb3b;
 $danger-color: rgb(168, 15, 15);
+$success-color: rgb(5, 228, 24);
 $mobile-width-threshold: 800px;
 @keyframes pulsate {
     100% {
@@ -18,6 +19,23 @@ $mobile-width-threshold: 800px;
         /* A slightly smaller blur radius */
         text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09,
             0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+    }
+}
+
+@keyframes pulsateSuccess {
+    100% {
+        /* Larger blur radius */
+        text-shadow: 0 0 4px $success-color, 0 0 4px $success-color,
+            0 0 4px $success-color, 0 0 4px $success-color,
+            0 0 80px $success-color, 0 0 90px $success-color,
+            0 0 100px $success-color, 0 0 150px $success-color;
+    }
+    0% {
+        /* A slightly smaller blur radius */
+        text-shadow: 0 0 4px $success-color, 0 0 4px $success-color,
+            0 0 4px $success-color, 0 0 4px $success-color,
+            0 0 73px $success-color, 0 0 80px $success-color,
+            0 0 94px $success-color, 0 0 140px $success-color;
     }
 }
 

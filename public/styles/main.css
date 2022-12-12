@@ -15,6 +15,17 @@
   }
 }
 
+@keyframes pulsateSuccess {
+  100% {
+    /* Larger blur radius */
+    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 80px #05e418, 0 0 90px #05e418, 0 0 100px #05e418, 0 0 150px #05e418;
+  }
+  0% {
+    /* A slightly smaller blur radius */
+    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 73px #05e418, 0 0 80px #05e418, 0 0 94px #05e418, 0 0 140px #05e418;
+  }
+}
+
 @keyframes flicker {
   0%,
   18%,
@@ -60,6 +71,10 @@ form {
 
 .text-danger {
   animation: flicker 1.5s infinite alternate;
+}
+
+.text-success {
+  animation: pulsateSuccess 2.5s infinite alternate;
 }
 
 .border-danger {
