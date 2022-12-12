@@ -4,6 +4,45 @@
   padding: 0;
 }
 
+@keyframes pulsate {
+  100% {
+    /* Larger blur radius */
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09, 0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+  }
+  0% {
+    /* A slightly smaller blur radius */
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+  }
+}
+
+@keyframes pulsateSuccess {
+  100% {
+    /* Larger blur radius */
+    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 80px #05e418, 0 0 90px #05e418, 0 0 100px #05e418, 0 0 150px #05e418;
+  }
+  0% {
+    /* A slightly smaller blur radius */
+    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 73px #05e418, 0 0 80px #05e418, 0 0 94px #05e418, 0 0 140px #05e418;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 4px #a80f0f, 0 0 11px #a80f0f, 0 0 19px #a80f0f, 0 0 40px #ff0095, 0 0 80px #ff0095, 0 0 90px #ff0095, 0 0 100px #ff0095, 0 0 150px #ff0095;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
+
 @media (min-width: 800px) {
   .main-header__nav {
     display: flex;
@@ -15,7 +54,7 @@
 
 body {
   font-weight: 400;
-  background-color: #2a2e2e;
+  background-image: url("/images/wepik-photo-mode-20221112-2322.jpeg");
 }
 
 main {
@@ -26,8 +65,40 @@ form {
   display: inline;
 }
 
+.active {
+  animation: pulsate 2.5s infinite alternate;
+}
+
+.text-danger {
+  animation: flicker 1.5s infinite alternate;
+}
+
+.text-success {
+  animation: pulsateSuccess 2.5s infinite alternate;
+}
+
+.border-danger {
+  animation: pulsate 2.5s infinite alternate;
+  border: 0px solid #fff;
+  border-radius: 0.5rem;
+  padding: 0.4em;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe, 0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
+}
+
 .centered {
   text-align: center;
+}
+
+.navbar.bg-dark {
+  background: rgba(0, 0, 0, 0.41) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(19px);
+  border-radius: 10px !important;
+}
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active, .navbar-toggler-icon:focus, .navbar-toggler-icon:active {
+  border: none !important;
+  outline: none !important;
 }
 
 .main-header {
@@ -150,6 +221,13 @@ form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
+.card.bg-dark {
+  background: rgba(0, 0, 0, 0.24) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(19px);
+  border-radius: 10px !important;
+}
+
 .card__header, .card__content {
   padding: 1rem;
 }
@@ -176,6 +254,13 @@ form {
 .card__actions button,
 .card__actions a {
   margin: 0 0.25rem;
+}
+
+.toast.bg-dark {
+  background: rgba(0, 0, 0, 0.24) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(19px);
+  border-radius: 10px !important;
 }
 
 .btn {

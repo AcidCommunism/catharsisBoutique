@@ -10,19 +10,58 @@ block content
     include ../includes/error-messages.pug
     div(class="d-flex flex-column align-items-center m-5")
         div(class="card bg-dark w-auto")
-            form(class="px-4 py-3" action="/auth/sign-up" method="POST")
+            form(class="px-4 py-3" action="/auth/sign-up" method="POST" novalidate)
                 div(class="mb-3")
-                    label(for="name" class="form-label text-light") Tell us your Name
-                    input(type="text" class="form-control bg-light bg-gradient border-dark" id="name" name="name" placeholder="John Doe Stevenson McNuggets Jr.")
+                    label(
+                        for="name"
+                        class= errorMessages.find(e => e.includes('name')) ? 'form-label text-danger' : 'form-label text-light'
+                        ) Tell us your Name
+                    input(
+                        type="text"
+                        class= errorMessages.find(e => e.includes('name')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
+                        id="name"
+                        name="name"
+                        placeholder="John Doe Stevenson McNuggets Jr."
+                        value= previousInput===undefined ? "" : previousInput.name
+                        )
                 div(class="mb-3")
-                    label(for="email" class="form-label text-light") Your email
-                    input(type="email" class="form-control bg-light bg-gradient border-dark" id="email" name="email" placeholder="email@example.com")
+                    label(
+                        for="email"
+                        class= errorMessages.find(e => e.includes('email')) ? 'form-label text-danger' : 'form-label text-light'
+                        ) Your email
+                    input(
+                        class= errorMessages.find(e => e.includes('email')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
+                        type="email"
+                        id="email" name="email"
+                        placeholder="email@example.com"
+                        value= previousInput===undefined ? "" : previousInput.email
+                        )
                 div(class="mb-3")
-                    label(for="password" class="form-labe text-light") Your password
-                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="password" name="password" placeholder="P@$$w0rd")
+                    label(
+                        for="password"
+                        class= errorMessages.find(e => e.includes(' password ')) ? 'form-label text-danger' : 'form-label text-light'
+                        ) Your password
+                    input(
+                        type="password"
+                        class= errorMessages.find(e => e.includes(' password ')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
+                        id="password"
+                        name="password"
+                        placeholder="P@$$w0rd"
+                        value= previousInput===undefined ? "" : previousInput.password
+                        )
                 div(class="mb-3")
-                    label(for="confirmPassword" class="form-labe text-light") Confirm password
-                    input(type="password" class="form-control bg-light bg-gradient border-dark" id="confirmPassword" name="confirmPassword" placeholder="C0nf1rm P@$$w0rd")
+                    label(
+                        for="confirmPassword"
+                        class= errorMessages.find(e => e.includes('confirmPassword')) ? 'form-label text-danger' : 'form-label text-light'
+                        ) Confirm password
+                    input(
+                        type="password"
+                        class= errorMessages.find(e => e.includes('confirmPassword')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="C0nf1rm P@$$w0rd"
+                        value= previousInput===undefined ? "" : previousInput.confirmPassword
+                        )
                 div(class="d-flex flex-column align-items-center")
                     input(
                         type="hidden"

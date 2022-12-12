@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Mailer } from '../util/mailer';
 import crypto from 'crypto';
 import { User as IUser } from '../../types/Iuser';
+import { validationResult } from 'express-validator/check';
 
 export class AuthController {
     public getSignIn(
@@ -41,7 +42,16 @@ export class AuthController {
             .then(user => {
                 if (!user) {
                     req.flash('error', 'User not found🙊');
-                    return res.redirect('/auth/sign-in');
+                    res.locals.errorMessages = req.flash('error');
+                    return res.status(422).render('auth/sign-in', {
+                        path: '/auth/sign-in',
+                        pageTitle: 'Sign in',
+                        user: req.session.user,
+                        previousInput: {
+                            email: email,
+                            password: password,
+                        },
+                    });
                 }
                 bcryptjs
                     .compare(password, user.password.toString())
@@ -62,7 +72,16 @@ export class AuthController {
                             "Oh-oh! Username/password don't match🙊\n" +
                                 '<p>Try again?</p><p>Or perhaps you need a <a href="/auth/reset-pwd">password reset</a>?</p>'
                         );
-                        res.redirect('/auth/sign-in');
+                        res.locals.errorMessages = req.flash('error');
+                        res.status(422).render('auth/sign-in', {
+                            path: '/auth/sign-in',
+                            pageTitle: 'Sign in',
+                            user: req.session.user,
+                            previousInput: {
+                                email: email,
+                                password: password,
+                            },
+                        });
                     });
             })
             .catch(err => logger.error(err));
@@ -74,6 +93,31 @@ export class AuthController {
         next: express.NextFunction
     ) {
         const { name, email, password, confirmPassword } = req.body;
+        const validationErrors = validationResult(req);
+        if (!validationErrors.isEmpty()) {
+            logger.info(validationErrors);
+            validationErrors
+                .array()
+                .forEach(err =>
+                    req.flash(
+                        'error',
+                        `Error in field "${err.param}"!<p>${err.msg}</p>`
+                    )
+                );
+            res.locals.errorMessages = req.flash('error');
+            return res.status(422).render('auth/sign-up', {
+                path: '/auth/sign-up',
+                pageTitle: 'Sign up',
+                user: req.session.user,
+                previousInput: {
+                    name: name,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                },
+            });
+        }
+
         User.findOne({ email: email })
             .then(user => {
                 if (user) {
@@ -83,6 +127,7 @@ export class AuthController {
                             '<p>If you are a user already, you can <a href="/auth/sign-in">sign in</a>.</p>' +
                             '<p>Or perhaps you need a <a href="/auth/reset-pwd">password reset</a>?</p>'
                     );
+                    res.locals.errorMessages = req.flash('error');
                     return res.redirect('/auth/sign-up');
                 }
                 return bcryptjs
