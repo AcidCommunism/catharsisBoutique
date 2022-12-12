@@ -43,7 +43,7 @@ block content
                         ) Your password
                     input(
                         type="password"
-                        class= errorMessages.find(e => e.includes('password')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
+                        class= errorMessages.find(e => e.includes(' password ')) ? 'form-control bg-light bg-gradient border-danger' : 'form-control bg-light bg-gradient border-dark'
                         id="password"
                         name="password"
                         placeholder="P@$$w0rd"

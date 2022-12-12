@@ -42,6 +42,7 @@ export class AuthController {
             .then(user => {
                 if (!user) {
                     req.flash('error', 'User not found🙊');
+                    res.locals.errorMessages = req.flash('error');
                     return res.status(422).render('auth/sign-in', {
                         path: '/auth/sign-in',
                         pageTitle: 'Sign in',
@@ -71,6 +72,7 @@ export class AuthController {
                             "Oh-oh! Username/password don't match🙊\n" +
                                 '<p>Try again?</p><p>Or perhaps you need a <a href="/auth/reset-pwd">password reset</a>?</p>'
                         );
+                        res.locals.errorMessages = req.flash('error');
                         res.status(422).render('auth/sign-in', {
                             path: '/auth/sign-in',
                             pageTitle: 'Sign in',
@@ -93,7 +95,7 @@ export class AuthController {
         const { name, email, password, confirmPassword } = req.body;
         const validationErrors = validationResult(req);
         if (!validationErrors.isEmpty()) {
-            console.log(validationErrors);
+            logger.info(validationErrors);
             validationErrors
                 .array()
                 .forEach(err =>
@@ -102,6 +104,7 @@ export class AuthController {
                         `Error in field "${err.param}"!<p>${err.msg}</p>`
                     )
                 );
+            res.locals.errorMessages = req.flash('error');
             return res.status(422).render('auth/sign-up', {
                 path: '/auth/sign-up',
                 pageTitle: 'Sign up',
@@ -124,6 +127,7 @@ export class AuthController {
                             '<p>If you are a user already, you can <a href="/auth/sign-in">sign in</a>.</p>' +
                             '<p>Or perhaps you need a <a href="/auth/reset-pwd">password reset</a>?</p>'
                     );
+                    res.locals.errorMessages = req.flash('error');
                     return res.redirect('/auth/sign-up');
                 }
                 return bcryptjs

@@ -44,6 +44,23 @@ form {
     display: inline;
 }
 
+.active {
+    animation: pulsate 2.5s infinite alternate;
+}
+
+.text-danger {
+    animation: flicker 1.5s infinite alternate;
+}
+
+.border-danger {
+    animation: pulsate 2.5s infinite alternate;
+    border: 0px solid #fff;
+    border-radius: 0.5rem;
+    padding: 0.4em;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
+        0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
+}
+
 .centered {
     text-align: center;
 }
