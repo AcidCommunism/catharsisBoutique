@@ -38,6 +38,7 @@ body {
 
 main {
     padding: $default-padding;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 form {

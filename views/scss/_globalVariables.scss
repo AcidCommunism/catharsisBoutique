@@ -58,3 +58,12 @@ $mobile-width-threshold: 800px;
         text-shadow: none;
     }
 }
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
