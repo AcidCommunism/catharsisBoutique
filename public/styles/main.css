@@ -102,7 +102,7 @@ form {
 .navbar.bg-dark {
   background: rgba(0, 0, 0, 0.41) !important;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  backdrop-filter: blur(19px);
+  backdrop-filter: blur(8px);
   border-radius: 10px !important;
 }
 
@@ -234,7 +234,7 @@ form {
 .card.bg-dark {
   background: rgba(0, 0, 0, 0.24) !important;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  backdrop-filter: blur(19px);
+  backdrop-filter: blur(8px);
   border-radius: 10px !important;
 }
 
@@ -269,7 +269,7 @@ form {
 .toast.bg-dark {
   background: rgba(0, 0, 0, 0.24) !important;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  backdrop-filter: blur(19px);
+  backdrop-filter: blur(8px);
   border-radius: 10px !important;
 }
 
