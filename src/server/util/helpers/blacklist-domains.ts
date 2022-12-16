@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import path from 'path';
 import { logger } from '../../../logger';
 
@@ -9,11 +9,11 @@ export class BlackListDomainsHelper {
         '../../../../../src/server/util/data/blacklist-domains.json'
     );
 
-    private static _readFromFile() {
+    private static async _readFromFile() {
         let domains: string[];
         try {
             domains = JSON.parse(
-                fs.readFileSync(this.blacklistFilePath).toString()
+                (await fs.readFile(this.blacklistFilePath)).toString()
             ).blacklistDomains;
             return domains;
         } catch (error) {
@@ -26,9 +26,9 @@ export class BlackListDomainsHelper {
         }
     }
 
-    public static get() {
+    public static async get() {
         if (!this.blacklistDomains) {
-            this.blacklistDomains = this._readFromFile();
+            this.blacklistDomains = await this._readFromFile();
         }
         return this.blacklistDomains;
     }

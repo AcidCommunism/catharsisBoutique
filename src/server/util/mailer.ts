@@ -32,6 +32,6 @@ export class Mailer {
             text,
         };
 
-        return await Mailer.transporter.sendMail(mailOptions);
+        return Mailer.transporter.sendMail(mailOptions);
     }
 }

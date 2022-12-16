@@ -6,16 +6,18 @@ export function signUpValidation() {
     return [
         check('email')
             .isEmail()
-            .custom((value, { req }) => {
-                BlackListDomainsHelper.get().forEach(domain => {
-                    if (value.split('@')[1] === domain) {
-                        throw new Error(
-                            `Sorry, domain ${domain} is blacklisted`
-                        );
-                    }
-                });
-                return true;
-            })
+            // TODO: WHY YOU NO WORK?🤔
+            // .custom(async (value, { req }) => {
+            //     const blDomains = await BlackListDomainsHelper.get();
+            //     blDomains.forEach(domain => {
+            //         if (value.split('@')[1] === domain) {
+            //             return Promise.reject(
+            //                 `Sorry, domain ${domain} is blacklisted`
+            //             );
+            //         }
+            //     });
+            //     return true;
+            // })
             .custom((value, { req }) => {
                 return User.findOne({ email: value }).then(user => {
                     if (user) {

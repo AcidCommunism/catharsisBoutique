@@ -141,13 +141,13 @@ export class AuthController {
                         });
                         newUser.save();
                     })
-                    .then(() => {
-                        return Mailer.sendMail(
+                    .then(() =>
+                        Mailer.sendMail(
                             email,
                             `Sup ${name}? ${process.env.SHOP_NAME} shop welcomes you!`,
                             '<h1>Hi!</h1><p>Here goes our welcoming letter, blah-blah...</p>'
-                        );
-                    })
+                        )
+                    )
                     .then(result => {
                         logger.info(
                             `Outbound e-mail for user ${email} sent. Result:`
@@ -212,8 +212,8 @@ export class AuthController {
                         Date.now() + 360 * 1000
                     );
                     user.save()
-                        .then(user => {
-                            return Mailer.sendMail(
+                        .then(user =>
+                            Mailer.sendMail(
                                 user!.email.toString(),
                                 `${process.env.SHOP_NAME} shop here👋About that password reset...`,
                                 `
@@ -222,8 +222,8 @@ export class AuthController {
                                 <p>Otherwise - please ignore this letter.</p>
                                 <p>Have a nice one😉</p>
                                 `
-                            );
-                        })
+                            )
+                        )
                         .then(result => {
                             logger.info(
                                 `Outbound e-mail for user ${
