@@ -9,11 +9,11 @@ block styles
 block content 
     main(class="text-center")
         if orders.length <= 0
-            h1(class="text-light text-align-center") Nothing here yet!🙈
+            h1(class="text-light text-align-center active") Nothing here yet!🙈
         else 
             div(class="d-flex flex-column align-items-center")
                 each order in orders 
-                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3")
+                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3 active")
                         h1.card-title Order # #{order._id}
                         each item in order.products 
                             p.card-text #{item.product.title} (#{item.quantity})

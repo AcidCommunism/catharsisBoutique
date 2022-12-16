@@ -76,7 +76,7 @@ form {
 }
 
 .active {
-  animation: pulsate 2.5s infinite alternate;
+  text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
 }
 
 .text-danger {

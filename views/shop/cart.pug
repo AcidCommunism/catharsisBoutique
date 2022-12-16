@@ -12,7 +12,7 @@ block content
         if products.length > 0
             div(class="d-flex flex-column align-items-center")
                 each item in products
-                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3")
+                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3 active")
                         h1.card-title #{item.productId.title}
                         p.card-text Quantity: #{item.quantity}
                         form(action="/cart-delete-item" method="POST")
@@ -35,7 +35,7 @@ block content
                         name="_csrf")
                     button(type="submit" class="btn bg-dark") Checkout 
         else
-            h1(class="text-light text-align-center") Looks like your cart is empty🤔
+            h1(class="text-light text-align-center active") Looks like your cart is empty🤔
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js") 
