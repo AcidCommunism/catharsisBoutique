@@ -1,21 +1,22 @@
 .card__actions 
     div(class="container d-flex flex-column my-2")
         div(class="container text-center")
-            if path==='/'
-                a(
-                    href="/products/" + product._id
-                    class="btn btn-outline-primary bg-dark") Details
-            if isAuthenticated
-                form(action="/cart" method="POST")
-                    button(
-                        class="btn btn-outline-primary bg-dark"
-                        type="submit") Add to cart
-                    input(
-                        type="hidden"
-                        name="productId"
-                        value=product._id
-                        )
-                    input(
-                        type="hidden"
-                        value=csrfToken
-                        name="_csrf")
+            .container 
+                if path==='/'
+                    .button(class="btn btn-outline-primary bg-dark") 
+                        a(href="/products/" + product._id) Details
+                if isAuthenticated
+                    form(action="/cart" method="POST")
+                        button(
+                            class="btn btn-outline-primary bg-dark success"
+                            type="submit")
+                                a Add to cart
+                        input(
+                            type="hidden"
+                            name="productId"
+                            value=product._id
+                            )
+                        input(
+                            type="hidden"
+                            value=csrfToken
+                            name="_csrf")

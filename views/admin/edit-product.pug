@@ -55,7 +55,9 @@ block content
                     type="hidden"
                     value=csrfToken
                     name="_csrf")
-                button(type="submit" class="btn bg-dark border-dark") Update product
+                .container
+                    button(type="submit" class="btn bg-dark border-dark")
+                        a Update product
         else 
             form.product-form(
                 action="/admin/add-product" 
@@ -95,7 +97,9 @@ block content
                     type="hidden"
                     value=csrfToken
                     name="_csrf")
-                button(type="submit" class="btn bg-dark") Add product
+                .container
+                    button(type="submit" class="btn bg-dark")
+                        a Add product
 block scripts 
     script(src="/js/main.js")
     script(src="bootstrap/dist/js/bootstrap.bundle.js")

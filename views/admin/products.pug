@@ -24,9 +24,8 @@ block content
                                 div(class="card-text text-center") #{product.description}
                             div(class="container d-flex flex-column my-2")
                                 div(class="container text-center")
-                                    a(
-                                        href="/admin/edit-product/" + product._id + "?edit=true"
-                                        class="btn bg-dark") Edit 
+                                    button(class="btn bg-dark")
+                                        a(href="/admin/edit-product/" + product._id + "?edit=true") Edit 
                                     form(
                                         action="/admin/delete-product"
                                         method="POST")
@@ -38,7 +37,8 @@ block content
                                             type="hidden"
                                             name="productId"
                                             value=product._id)
-                                        button(type="submit" class="btn danger bg-dark") Delete
+                                        button(type="submit" class="btn danger bg-dark")
+                                            a Delete
         else 
             h1(class="text-light text-align-center active") No products here (yet?)
 

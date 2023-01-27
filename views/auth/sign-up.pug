@@ -62,12 +62,13 @@ block content
                         placeholder="C0nf1rm P@$$w0rd"
                         value= previousInput===undefined ? "" : previousInput.confirmPassword
                         )
-                div(class="d-flex flex-column align-items-center")
+                div(class="d-flex flex-column align-items-center container")
                     input(
                         type="hidden"
                         value=csrfToken
                         name="_csrf")
-                    button(class="btn btn-primary bg-dark" type="submit") Sign Up
+                    button(class="btn btn-primary bg-dark" type="submit")
+                        a Sign Up
             div(class="card-body")
                 p(class="text-light") Already a member of our community? #[a(class="" href="/auth/sign-in") Sign In!]
 
