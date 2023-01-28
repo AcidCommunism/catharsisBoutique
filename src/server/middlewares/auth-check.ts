@@ -6,7 +6,7 @@ export function authCheck(
     next: express.NextFunction
 ) {
     if (!request.session.isAuthenticated) {
-        return response.redirect('/sign-in');
+        return response.redirect('/auth/sign-in');
     }
     next();
 }
