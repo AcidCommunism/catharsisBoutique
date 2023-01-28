@@ -3,12 +3,12 @@
         div(class="container text-center")
             .container 
                 if path==='/'
-                    .button(class="btn btn-outline-primary bg-dark") 
+                    button(class="btn btn-primary bg-dark") 
                         a(href="/products/" + product._id) Details
                 if isAuthenticated
                     form(action="/cart" method="POST")
                         button(
-                            class="btn btn-outline-primary bg-dark success"
+                            class="btn btn-primary bg-dark success"
                             type="submit")
                                 a Add to cart
                         input(

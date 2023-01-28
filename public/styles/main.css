@@ -262,11 +262,6 @@ form {
   text-align: center;
 }
 
-.card__actions button,
-.card__actions a {
-  margin: 0 0.25rem;
-}
-
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -274,6 +269,10 @@ form {
 }
 
 .container .btn {
+  background: rgba(0, 0, 0, 0.24) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(8px);
+  border-radius: 15px !important;
   position: relative;
   top: 0;
   left: 0;
@@ -290,7 +289,7 @@ form {
 .container .btn a {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0%;
   width: 100%;
   height: 100%;
   display: flex;
@@ -300,7 +299,7 @@ form {
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 22px;
+  border-radius: 15px;
   padding: 10px;
   letter-spacing: 1px;
   text-decoration: none;
