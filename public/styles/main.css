@@ -18,11 +18,11 @@
 @keyframes pulsateSuccess {
   100% {
     /* Larger blur radius */
-    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 80px #05e418, 0 0 90px #05e418, 0 0 100px #05e418, 0 0 150px #05e418;
+    text-shadow: 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 80px #1eff45, 0 0 90px #1eff45, 0 0 100px #1eff45, 0 0 150px #1eff45;
   }
   0% {
     /* A slightly smaller blur radius */
-    text-shadow: 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 4px #05e418, 0 0 73px #05e418, 0 0 80px #05e418, 0 0 94px #05e418, 0 0 140px #05e418;
+    text-shadow: 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 4px #1eff45, 0 0 73px #1eff45, 0 0 80px #1eff45, 0 0 94px #1eff45, 0 0 140px #1eff45;
   }
 }
 
@@ -62,6 +62,7 @@
 }
 
 body {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   background-image: url("/images/background.jpeg");
 }

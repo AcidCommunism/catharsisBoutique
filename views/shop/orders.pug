@@ -13,7 +13,7 @@ block content
         else 
             div(class="d-flex flex-column align-items-center")
                 each order in orders 
-                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3 active")
+                    div(class="card m-3 w-75 text-center center border-dark bg-dark text-light p-3")
                         h1.card-title Order # #{order._id}
                         each item in order.products 
                             p.card-text #{item.product.title} (#{item.quantity})
